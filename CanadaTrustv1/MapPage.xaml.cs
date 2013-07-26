@@ -23,7 +23,6 @@ namespace CanadaTrustv1
 {
     public partial class MapPage : PhoneApplicationPage
     {
-        GeocodeServiceClient geocodeServiceClient;
         GeoCoordinateWatcher coordinateWatcher;
         public ObservableCollection<Branch> Branches;
         TDLocatorRequest locatorRequest = new TDLocatorRequest();
@@ -44,30 +43,14 @@ namespace CanadaTrustv1
             {
                 if (lastLocation != coordinateWatcher.Position.Location)
                 {
-                    if (mapLoading.Visibility == System.Windows.Visibility.Collapsed)
-                    {
-                        mapLoading.Visibility = System.Windows.Visibility.Visible;
-                    }
-                    setLocation(coordinateWatcher.Position.Location.Latitude, coordinateWatcher.Position.Location.Longitude, 10, true);
+                    mapLoading.Visibility = System.Windows.Visibility.Visible;
+                    setLocation(coordinateWatcher.Position.Location.Latitude,
+                                coordinateWatcher.Position.Location.Longitude,
+                                10,
+                                true);
                     lastLocation = coordinateWatcher.Position.Location;
                 }
-                else
-                {
-                    mapLoading.Visibility = System.Windows.Visibility.Collapsed;
-                }
             };
-            //geocodeServiceClient = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
-            //geocodeServiceClient.GeocodeCompleted += (s,e) => {
-            //    var geoResult = (from r in e.Result.Results
-            //                     orderby (int)r.Confidence ascending
-            //                     select r).FirstOrDefault();
-            //    if(geoResult != null) {
-            //        this.setLocation(geoResult.Locations[0].Latitude,
-            //            geoResult.Locations[0].Longitude,
-            //            11,
-            //            true);
-            //    }
-            //};
         }
 
         public string Key { get { return key; } }
@@ -100,9 +83,6 @@ namespace CanadaTrustv1
                     break;
                 }
             };
-
-
-            bingMap.SetView(location, zoomLevel);
         }
 
         private void callWebsite(Uri uri)
@@ -225,7 +205,6 @@ namespace CanadaTrustv1
             App.currentBranch = (int)pushpin.Tag;
             NavigationService.Navigate(new Uri("/MapDetailsPage.xaml", UriKind.Relative));
             mapLoadingTextBlock.Text = "Loading";
-            mapLoading.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void ApplicationBarIconButton_MainClick(object sender, EventArgs e)
@@ -245,12 +224,15 @@ namespace CanadaTrustv1
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
+            mapLoading.Visibility = System.Windows.Visibility.Collapsed;
+            AdRotatorControl.Invalidate();
             base.OnNavigatedTo(e);
             coordinateWatcher.Start();
         }
 
         protected override void OnNavigatingFrom(System.Windows.Navigation.NavigatingCancelEventArgs e)
         {
+            AdRotatorControl.Dispose();
             base.OnNavigatingFrom(e);
             coordinateWatcher.Stop();
         }
@@ -259,6 +241,11 @@ namespace CanadaTrustv1
         {
             base.OnNavigatedFrom(e);
             mapLoadingTextBlock.Text = "Updating";
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            AdRotatorControl.Invalidate();
         }
     }
 }
