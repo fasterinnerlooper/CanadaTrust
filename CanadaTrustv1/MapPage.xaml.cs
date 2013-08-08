@@ -18,6 +18,7 @@ using CanadaTrustv1.Models;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using System.Windows.Interop;
+using Microsoft.Phone.Tasks;
 
 namespace CanadaTrustv1
 {
@@ -207,21 +208,6 @@ namespace CanadaTrustv1
             mapLoadingTextBlock.Text = "Loading";
         }
 
-        private void ApplicationBarIconButton_MainClick(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-        }
-
-        private void ApplicationBarIconButton_MapClick(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));
-        }
-
-        private void ApplicationBarMenuItem_AboutClick(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
-        }
-
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             mapLoading.Visibility = System.Windows.Visibility.Collapsed;
@@ -246,6 +232,18 @@ namespace CanadaTrustv1
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             AdRotatorControl.Invalidate();
+        }
+
+        private void ApplicationBarIconButton_MainClick(object sender, EventArgs e)
+        {
+            WebBrowserTask webBrowserTask = new WebBrowserTask();
+            webBrowserTask.Uri = new Uri("http://www.td.com/w");
+            webBrowserTask.Show();
+        }
+
+        private void ApplicationBarMenuItem_AboutClick(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
     }
 }
