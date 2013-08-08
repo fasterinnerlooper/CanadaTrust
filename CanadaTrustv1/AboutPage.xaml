@@ -50,6 +50,11 @@
                         Style="{StaticResource PhoneTextExtraLargeStyle}"
                         Margin="0,20,0,0"
                         >Changes</TextBlock>
+                        <TextBlock>Version 1.2:</TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                            • Removed Smaato as an ad provider<LineBreak/>
+                            • Replaced a stray link to go to the Easyweb page in a browser<LineBreak/>
+                        </TextBlock>
                         <TextBlock>Version 1.1:</TextBlock>
                         <TextBlock TextWrapping="Wrap">
                             • Changed advertising provider<LineBreak/>
@@ -74,9 +79,9 @@
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Easyweb" Click="ApplicationBarIconButton_MainClick" />
             <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Locations" Click="ApplicationBarIconButton_MapClick" />
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Easyweb" Click="ApplicationBarIconButton_MainClick" />
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_AboutClick" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
