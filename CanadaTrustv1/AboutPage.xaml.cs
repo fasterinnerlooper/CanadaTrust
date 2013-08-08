@@ -23,7 +23,9 @@ namespace CanadaTrustv1
 
         private void ApplicationBarIconButton_MainClick(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            WebBrowserTask webBrowserTask = new WebBrowserTask();
+            webBrowserTask.Uri = new Uri("http://www.td.com/w");
+            webBrowserTask.Show();
         }
 
         private void ApplicationBarIconButton_MapClick(object sender, EventArgs e)
