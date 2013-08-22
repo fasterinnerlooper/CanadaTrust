@@ -100,9 +100,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Factory\BranchFactory.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MapDetailsPage.xaml.cs">
       <DependentUpon>MapDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -128,10 +125,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MapDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,7 +137,9 @@
   <ItemGroup>
     <None Include="CanadaTrustv1_2013_07_26_17_31_20.sap" />
     <None Include="packages.config" />
-    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\AppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\WMAppManifest.xml" />
     <None Include="Service References\BingMapsGeocodeService\Arrays.xsd" />
     <None Include="Service References\BingMapsGeocodeService\CanadaTrustv1.BingMapsGeocodeService.GeocodeResponse.datasource">
