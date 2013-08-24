@@ -65,27 +65,36 @@ namespace CanadaTrustv1
             reverseGeocodeRequest.Credentials = new Credentials();
             reverseGeocodeRequest.Credentials.ApplicationId = key;
             reverseGeocodeRequest.Location = location;
-            GeocodeServiceClient geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
-            geocodeService.ReverseGeocodeAsync(reverseGeocodeRequest);
-            geocodeService.ReverseGeocodeCompleted += (s, e) =>
+            GeocodeServiceClient geocodeService = null;
+            try
             {
-                ReverseGeocodeCompletedEventArgs response = (ReverseGeocodeCompletedEventArgs)e;
-                GeocodeResponse geocodeResponse = response.Result;
-                foreach (GeocodeResult result in geocodeResponse.Results)
-                {
-                    if (result == null || result.Address.AddressLine == "")
-                    {
-                        continue;
-                    }
-                    currentAddress = result.Address.FormattedAddress;
-                    locatorRequest.FullAddress = currentAddress;
-                    Uri compiledUri = locatorRequest.compileUri();
-                    callWebsite(compiledUri);
-                    break;
-                }
-            };
+                geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
+                geocodeService.ReverseGeocodeAsync(reverseGeocodeRequest);
+                geocodeService.ReverseGeocodeCompleted += geocodeService_ReverseGeocodeCompleted;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
+        private void geocodeService_ReverseGeocodeCompleted(object sender, ReverseGeocodeCompletedEventArgs e)
+        {
+            ReverseGeocodeCompletedEventArgs response = (ReverseGeocodeCompletedEventArgs)e;
+            GeocodeResponse geocodeResponse = response.Result;
+            foreach (GeocodeResult result in geocodeResponse.Results)
+            {
+                if (result == null || result.Address.AddressLine == "")
+                {
+                    continue;
+                }
+                currentAddress = result.Address.FormattedAddress;
+                locatorRequest.FullAddress = currentAddress;
+                Uri compiledUri = locatorRequest.compileUri();
+                callWebsite(compiledUri);
+                break;
+            }
+        }
         private void callWebsite(Uri uri)
         {
             bingMap.Children.Clear();
@@ -97,6 +106,11 @@ namespace CanadaTrustv1
                 {
                     HtmlDocument doc = e.Document;
                     HtmlNode error = doc.DocumentNode.SelectSingleNode("//div[@class='copyerror']");
+                    if (error != null)
+                    {
+                        MessageBox.Show("The service is unavailable, please try again later");
+                        return;
+                    }
                     HtmlNode mapURL = doc.DocumentNode.SelectSingleNode("//img[@usemap='#pins']");
                     string mapURLstring = mapURL.Attributes["src"].Value;
 
