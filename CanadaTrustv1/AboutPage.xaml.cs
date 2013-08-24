@@ -43,7 +43,7 @@ namespace CanadaTrustv1
             EmailComposeTask composerTask = new EmailComposeTask()
             {
                 To = "shafiq.jetha@outlook.com",
-                Subject = "Feedback on the Canda Trust Windows Phone app"
+                Subject = "Feedback on the Canada Trust Windows Phone app"
             };
             composerTask.Show();
         }
