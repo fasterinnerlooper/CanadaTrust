@@ -78,7 +78,6 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Minimized" IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Lauch Easyweb in a new window" Click="ApplicationBarIconButton_MainClick" />
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_AboutClick" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
