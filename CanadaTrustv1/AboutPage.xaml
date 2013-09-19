@@ -13,8 +13,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-    
-    
+
+
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -22,7 +22,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <controls:Pivot Grid.Row="1">
             <controls:PivotItem Header="about">
                 <!--ContentPanel - place additional content here-->
@@ -30,14 +30,13 @@
                     <TextBlock TextWrapping="Wrap">
                 App created and developed by Shafiq Jetha.<LineBreak/><LineBreak/>
                 Thanks to toetapz and the noun project for icons and coding examples.<LineBreak/><LineBreak/>
-                TD Bank, TD Canada Trust and the TD Bank logo are Trade-Marks of Toronto-Dominion Bank ("TD Bank"), other members of the TD Bank Group or of third parties and is used without permission.<LineBreak/><LineBreak/>
                 Packages used:<LineBreak/>HtmlAgilityPack
                     </TextBlock>
                 </Grid>
             </controls:PivotItem>
             <controls:PivotItem Header="what's new?">
                 <ScrollViewer>
-                    <StackPanel Margin="10,0,0,0">
+                    <StackPanel Margin="0">
                         <TextBlock TextWrapping="Wrap">
                      Issues, suggestions and problems, please contact me here:
                         </TextBlock>
@@ -50,25 +49,65 @@
                         Style="{StaticResource PhoneTextExtraLargeStyle}"
                         Margin="0,20,0,0"
                         >Changes</TextBlock>
-                        <TextBlock>Version 1.2:</TextBlock>
-                        <TextBlock TextWrapping="Wrap">
-                            • Removed Smaato as an ad provider<LineBreak/>
-                            • Replaced a stray link to go to the Easyweb page in a browser<LineBreak/>
-                        </TextBlock>
-                        <TextBlock>Version 1.1:</TextBlock>
-                        <TextBlock TextWrapping="Wrap">
-                            • Changed advertising provider<LineBreak/>
-                            • Made improvements to the map page<LineBreak/>
-                        </TextBlock>
-                        <TextBlock>Version 1.0:</TextBlock>
-                        <TextBlock TextWrapping="Wrap">The Canada Trust app launches with the following features:
+                        <TextBlock>
+                        	<Run Text="Version 1.3:"/>
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap">
-                            • Logging into the TD mobile website<LineBreak/>
-                            • Finding the 5 closest TD Canada Trust locations using GPS<LineBreak/>
-                            • Getting directions to a TD Canada Trust location<LineBreak/>
-                            • Calling a TD Canada Trust Branch<LineBreak/>
-                            • Getting branch information, such as Branch number, Phone Number, address and hours<LineBreak/>
+                        	<Run Text="• Removed branding"/>
+                        	<LineBreak/>
+                        	<Run Text="• Added location services privacy policy"/>
+                        	<LineBreak/>
+                        	<Run/>
+                        </TextBlock>
+                        <TextBlock>
+                        	<Run Text="Version 1.2:"/>
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                        	<Run Text="• Removed Smaato as an ad provider"/>
+                        	<LineBreak/>
+                        	<Run Text="• Replaced a stray link to go to the Easyweb page in a browser"/>
+                        	<LineBreak/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Version 1.1"/>
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                        	<Run Text="• Changed advertising provider"/>
+                        	<LineBreak/>
+                        	<Run Text="• Made improvements to the map page"/>
+                        	<LineBreak/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Version 1.0:"/>
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run Text="The Canada Trust app launches with the following features:"/>
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run Text="• Logging into the TD mobile website"/>
+                            <Run Text="• Finding the 5 closest TD Canada Trust locations using GPS"/>
+                            <Run Text="• Getting directions to a TD Canada Trust location"/>
+                            <Run Text="• Calling a TD Canada Trust Branch"/>
+                            <Run Text="• Getting branch information, such as Branch number, Phone Number, address and hours"/>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </controls:PivotItem>
+            <controls:PivotItem Header="Privacy Policy">
+                <ScrollViewer HorizontalAlignment="Left" Height="562" VerticalAlignment="Top" Width="456">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Left">
+                        	<Run Text="In order to use this application, location data provided by the device will need to be accessed."/>
+                        	<LineBreak/>
+                        	<Run Text="No other data outside what has been requested, after you have offered your permission, is used by this application."/>
+                        	<LineBreak/>
+                        	<Run Text="This data is shared with the mapping services provided by Microsoft and by TD Canada Trust to identify your location and the branches and ATMs owned by TD Canada Trust that are located within your vicinity."/>
+                        	<LineBreak/>
+                        	<Run Text="No identifying information is stored in the application or sent over the internet that could be used to identify the device or the user of the device."/>
+                        	<LineBreak/>
+                        	<Run Text="The location data used by this application are a requirement, and as such, if you no longer wish to provide this information, the application must be removed from your device."/>
+                        	<LineBreak/>
+                        	<Run Text="If you have any questions or concerns, please swipe across to the 'about' page and tap the 'Contact Me' link."/>
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
