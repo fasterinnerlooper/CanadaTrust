@@ -21,13 +21,6 @@ namespace CanadaTrustv1
             InitializeComponent();
         }
 
-        private void ApplicationBarIconButton_MainClick(object sender, EventArgs e)
-        {
-            WebBrowserTask webBrowserTask = new WebBrowserTask();
-            webBrowserTask.Uri = new Uri("http://www.td.com/w");
-            webBrowserTask.Show();
-        }
-
         private void ApplicationBarIconButton_MapClick(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));
@@ -38,7 +31,12 @@ namespace CanadaTrustv1
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
 
-        private void HyperlinkButton_Tap(object sender, GestureEventArgs e)
+        private void ApplicationBarMenuItem_Settings(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+        }
+
+        private void HyperlinkButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             EmailComposeTask composerTask = new EmailComposeTask()
             {

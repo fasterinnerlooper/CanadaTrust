@@ -121,6 +121,7 @@
             <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Locations" Click="ApplicationBarIconButton_MapClick" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_AboutClick" />
+                <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarMenuItem_Settings" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
