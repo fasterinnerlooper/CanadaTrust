@@ -67,6 +67,11 @@ namespace CanadaTrustv1
             reverseGeocodeRequest.Credentials.ApplicationId = key;
             reverseGeocodeRequest.Location = location;
             GeocodeServiceClient geocodeService = null;
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == false)
+            {
+                MessageBox.Show("There was a problem connecting to the remote location service. Please check your internet connection and try again.", "Location Services problem", MessageBoxButton.OK);
+                return;
+            }
             try
             {
                 geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
