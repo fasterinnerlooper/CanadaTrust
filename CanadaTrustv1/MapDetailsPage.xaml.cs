@@ -40,7 +40,7 @@ namespace CanadaTrustv1
             Hours.Text = Branch.Hours;
         }
 
-        private void Address_Tap(object sender, GestureEventArgs e)
+        private void Address_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             LabeledMapLocation mapLocation = new LabeledMapLocation() {
                 Label = Branch.Address,
@@ -53,7 +53,7 @@ namespace CanadaTrustv1
 
         }
 
-        private void PhoneNumber_Tap(object sender, GestureEventArgs e)
+        private void PhoneNumber_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             TextBlock number = sender as TextBlock;
             PhoneCallTask phoneTask = new PhoneCallTask();
