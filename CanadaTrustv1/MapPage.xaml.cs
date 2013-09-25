@@ -104,7 +104,7 @@ namespace CanadaTrustv1
             }
             catch (Exception)
             {
-                MessageBox.Show("There was a problem connecting to the remote location service. Pleas check your internet connection and try again.", "Location Services problem", MessageBoxButton.OK);
+                MessageBox.Show("There was a problem connecting to the remote location service. Please check your internet connection and try again.", "Location Services problem", MessageBoxButton.OK);
                 return;
             }
         }
@@ -293,7 +293,7 @@ namespace CanadaTrustv1
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
 
-        private void ApplicationBarMenuItem_Settings(object sender, EventArgs e)
+        private void ApplicationBarMenuItem_SettingsClick(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
         }
