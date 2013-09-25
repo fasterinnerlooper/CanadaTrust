@@ -99,7 +99,7 @@ namespace CanadaTrustv1
                         callWebsite(compiledUri);
                         break;
                     }
-                    MessageBox.Show("This app is not available in your location/region. Please try again later", "Outside of Canada", MessageBoxButton.OK);
+                    MessageBox.Show("This app is not available in your location/region.\nPlease try again later.", "Outside of Canada", MessageBoxButton.OK);
                 }
             }
             catch (Exception)
