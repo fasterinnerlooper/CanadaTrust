@@ -19,6 +19,7 @@ using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using System.Windows.Interop;
 using Microsoft.Phone.Tasks;
+using System.IO.IsolatedStorage;
 
 namespace CanadaTrustv1
 {
@@ -27,7 +28,7 @@ namespace CanadaTrustv1
         GeoCoordinateWatcher coordinateWatcher;
         public ObservableCollection<Branch> Branches;
         TDLocatorRequest locatorRequest = new TDLocatorRequest();
-        string key = "AguTswrw5_cJGU7-8BVfFOYmGnZMXHvwz44VZLMEinF9oKLxeYlO9I9jdzoR_bk8";
+        string key = "AuVxcO7q6MuOaSUWkkOpV19yBG0CSv-SaCN7xxfKvgURFNbW36Jyz9rDlgmf72dP ";
         Uri locationLookupURI = new Uri("http://td.via.infonow.net/locator/NewSearch.do");
         string currentAddress;
         GeoCoordinate lastLocation = new GeoCoordinate();
@@ -80,19 +81,31 @@ namespace CanadaTrustv1
 
         private void geocodeService_ReverseGeocodeCompleted(object sender, ReverseGeocodeCompletedEventArgs e)
         {
-            ReverseGeocodeCompletedEventArgs response = (ReverseGeocodeCompletedEventArgs)e;
-            GeocodeResponse geocodeResponse = response.Result;
-            foreach (GeocodeResult result in geocodeResponse.Results)
+            GeocodeResponse geocodeResponse;
+            try
             {
-                if (result == null || result.Address.AddressLine == "")
+                geocodeResponse = e.Result;
+                foreach (GeocodeResult result in geocodeResponse.Results)
                 {
-                    continue;
+                    if (result == null || result.Address.AddressLine == "")
+                    {
+                        continue;
+                    }
+                    if (result.Address.CountryRegion == "Canada")
+                    {
+                        currentAddress = result.Address.FormattedAddress;
+                        locatorRequest.FullAddress = currentAddress;
+                        Uri compiledUri = locatorRequest.compileUri();
+                        callWebsite(compiledUri);
+                        break;
+                    }
+                    MessageBox.Show("This app is not available in your location/region. Please try again later", "Outside of Canada", MessageBoxButton.OK);
                 }
-                currentAddress = result.Address.FormattedAddress;
-                locatorRequest.FullAddress = currentAddress;
-                Uri compiledUri = locatorRequest.compileUri();
-                callWebsite(compiledUri);
-                break;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was a problem connecting to the remote location service. Pleas check your internet connection and try again.", "Location Services problem", MessageBoxButton.OK);
+                return;
             }
         }
         private void callWebsite(Uri uri)
@@ -108,6 +121,7 @@ namespace CanadaTrustv1
                     HtmlNode error = doc.DocumentNode.SelectSingleNode("//div[@class='copyerror']");
                     if (error != null)
                     {
+                        //Are we in the US? Check the first.
                         MessageBox.Show("The service is unavailable, please try again later");
                         return;
                     }
@@ -138,7 +152,7 @@ namespace CanadaTrustv1
                     Content = branch.Address,
                     Tag = branch.BranchID
                 };
-                pushpin.Tap += new EventHandler<GestureEventArgs>(pushpin_Tap);
+                pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
                 App.Branches.Add(branch);
                 bingMap.Children.Add(pushpin);
             }
@@ -224,6 +238,25 @@ namespace CanadaTrustv1
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
+            if (!IsolatedStorageSettings.ApplicationSettings.Contains("LocationConsent"))
+            {
+                MessageBoxResult consent = MessageBox.Show("This app requires use of Location Services data. Please tap 'OK' to give your consent.", "Location Services consent", MessageBoxButton.OKCancel);
+
+                if (consent == MessageBoxResult.OK)
+                {
+                    IsolatedStorageSettings.ApplicationSettings["LocationCosent"] = true;
+                }
+                else
+                {
+                    MessageBox.Show("Currently, this app requires location services to function. If you would like to enable location services, you can do so from the settings menu.", "Location Services Required.", MessageBoxButton.OK);
+                    return;
+                }
+            }
+            else if (IsolatedStorageSettings.ApplicationSettings["LocationConsent"] as Boolean? == false)
+            {
+                MessageBox.Show("Currently, this app requires location services to function. If you would like to enable location services, you can do so from the settings menu.", "Location Services required", MessageBoxButton.OK);
+                return;
+            }
             mapLoading.Visibility = System.Windows.Visibility.Collapsed;
             AdRotatorControl.Invalidate();
             base.OnNavigatedTo(e);
@@ -258,6 +291,11 @@ namespace CanadaTrustv1
         private void ApplicationBarMenuItem_AboutClick(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
+
+        private void ApplicationBarMenuItem_Settings(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
         }
     }
 }
