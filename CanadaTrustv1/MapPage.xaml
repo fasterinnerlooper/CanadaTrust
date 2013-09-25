@@ -45,12 +45,12 @@
                 <BingMap:Map Name="bingMap"
                          Width="Auto"
                          CopyrightVisibility="Visible"
-                         ZoomLevel="3"
+                         ZoomLevel="2.93"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
                          CredentialsProvider="{Binding Path=Key}">
                     <BingMap:Map.Center>
-                        <my:GeoCoordinate Latitude="51.064" Longitude="-114.062" />
+                        <my:GeoCoordinate Latitude="71.75" Longitude="-97" />
                     </BingMap:Map.Center>
                     <BingMap:MapItemsControl x:Name="mapItemsControl">
                         <BingMap:MapItemsControl.ItemTemplate>
