@@ -79,6 +79,7 @@
         <shell:ApplicationBar Mode="Minimized" IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_AboutClick" />
+                <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarMenuItem_SettingsClick" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
