@@ -10,6 +10,10 @@
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
+                <binding name="BasicHttpBinding_IGeocodeService2" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
             </basicHttpBinding>
             <customBinding>
                 <binding name="CustomBinding_IGeocodeService">
@@ -17,6 +21,10 @@
                     <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
                 </binding>
                 <binding name="CustomBinding_IGeocodeService1">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+                <binding name="CustomBinding_IGeocodeService2">
                     <binaryMessageEncoding />
                     <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
                 </binding>
@@ -35,6 +43,12 @@
             <endpoint address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc/binaryHttp"
                 binding="customBinding" bindingConfiguration="CustomBinding_IGeocodeService1"
                 contract="BingMapsGeocodeService.IGeocodeService" name="CustomBinding_IGeocodeService1" />
+            <endpoint address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IGeocodeService2"
+                contract="BingMapsGeocodeService.IGeocodeService" name="BasicHttpBinding_IGeocodeService2" />
+            <endpoint address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc/binaryHttp"
+                binding="customBinding" bindingConfiguration="CustomBinding_IGeocodeService2"
+                contract="BingMapsGeocodeService.IGeocodeService" name="CustomBinding_IGeocodeService2" />
         </client>
     </system.serviceModel>
 </configuration>
