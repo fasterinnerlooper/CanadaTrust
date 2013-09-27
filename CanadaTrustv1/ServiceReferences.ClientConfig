@@ -31,10 +31,10 @@
                 contract="BingMapsGeocodeService.IGeocodeService" name="CustomBinding_IGeocodeService" />
             <endpoint address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc"
                 binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IGeocodeService1"
-                contract="GeocodeService.IGeocodeService" name="BasicHttpBinding_IGeocodeService1" />
+                contract="BingMapsGeocodeService.IGeocodeService" name="BasicHttpBinding_IGeocodeService1" />
             <endpoint address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc/binaryHttp"
                 binding="customBinding" bindingConfiguration="CustomBinding_IGeocodeService1"
-                contract="GeocodeService.IGeocodeService" name="CustomBinding_IGeocodeService1" />
+                contract="BingMapsGeocodeService.IGeocodeService" name="CustomBinding_IGeocodeService1" />
         </client>
     </system.serviceModel>
 </configuration>
