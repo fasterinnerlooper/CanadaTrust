@@ -50,10 +50,26 @@
                         Margin="0,20,0,0"
                         >Changes</TextBlock>
                         <TextBlock>
-                            <Run Text="Version 1.0.0.5"/>
+                            <Run Text="Version 1.0.0.6:"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="• Fixed Ads not working"/>
+                            <LineBreak/>
+                            <Run Text="• Minor bug fixes"/>
+                            <LineBreak/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Version 1.0.0.5:"/>
                         </TextBlock>
                         <TextBlock>
                             <Run Text="• App officially launched" />
+                            <LineBreak/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Version 1.0.0.4:"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="• Minor bug fixes"/>
                             <LineBreak/>
                         </TextBlock>
                         <TextBlock>
