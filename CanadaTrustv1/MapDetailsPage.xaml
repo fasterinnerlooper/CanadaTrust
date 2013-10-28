@@ -37,7 +37,7 @@
             </StackPanel>
         </Grid>
         <adRotator:AdRotatorControl x:Name="AdRotatorControl"
-                DefaultAdType="Smaato"
+                DefaultAdType="AdDuplex"
                 AdDuplexAppId="44087"
                 PubCenterAppId="518c7-44fd-4c5c-af09-2e3e68a7fa65"
                 PubCenterAdUnitId="137213"
@@ -46,7 +46,7 @@
                 SlidingAdDirection="None"
                 SlidingAdDisplaySeconds="20"
                 Margin="0,2"
-                Grid.Row="0"
+                Grid.Row="1"
                 Height="80"
                 Width="480"
                 VerticalAlignment="Top"/>
