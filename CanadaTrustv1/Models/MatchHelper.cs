@@ -17,7 +17,15 @@ namespace CanadaTrustv1.Models
     {
         public static string Match(string xPathString, HtmlDocument doc, Regex regex)
         {
-            string rawInnerText = doc.DocumentNode.SelectSingleNode(xPathString).InnerText;
+            string rawInnerText;
+            try
+            {
+                rawInnerText = doc.DocumentNode.SelectSingleNode(xPathString).InnerText;
+            }
+            catch (NullReferenceException)
+            {
+                return null;
+            }
             Match matchRegex = regex.Match(rawInnerText);
             return matchRegex.Groups[1].Value;
         }
