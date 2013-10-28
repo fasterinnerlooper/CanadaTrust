@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -20,6 +21,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Interop;
 using Microsoft.Phone.Tasks;
 using System.IO.IsolatedStorage;
+using System.IO;
+using System.Threading;
 
 namespace CanadaTrustv1
 {
@@ -32,8 +35,11 @@ namespace CanadaTrustv1
         Uri locationLookupURI = new Uri("http://td.via.infonow.net/locator/NewSearch.do");
         string currentAddress;
         GeoCoordinate lastLocation = new GeoCoordinate();
-        Regex URLStringRegex, mapIDNumberRegex, BranchNumberRegex, PhoneNumberRegex, AddressRegex, HoursRegex, DistanceRegex;
+        Regex URLStringRegex, mapIDNumberRegex, BranchNumberRegex, PhoneNumberRegex, AddressRegex, Address2Regex, HoursRegex, DistanceRegex;
         Pushpin centreLocation;
+        LocationRect viewportSize = null;
+        HtmlDocument doc;
+        Dictionary<string, int> iDLookup = new Dictionary<string, int>();
 
         public MapPage()
         {
@@ -101,6 +107,9 @@ namespace CanadaTrustv1
                         currentAddress = result.Address.FormattedAddress;
                         locatorRequest.FullAddress = currentAddress;
                         Uri compiledUri = locatorRequest.compileUri();
+                        iDLookup = new Dictionary<string, int>();
+                        viewportSize = null;
+                        setupCentrePushpin();
                         callWebsite(compiledUri);
                         break;
                     }
@@ -113,93 +122,147 @@ namespace CanadaTrustv1
                 return;
             }
         }
+        private void fakeWebRequestCallback(IAsyncResult result) { }
+        private void webRequestCallback(IAsyncResult result)
+        {
+            HttpWebRequest request = (HttpWebRequest)result.AsyncState;
+            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(result);
+
+            using (Stream stream = response.GetResponseStream())
+            {
+                doc = new HtmlDocument();
+                doc.Load(stream);
+                HtmlNode error = doc.DocumentNode.SelectSingleNode("//div[@class='copyerror']");
+                if (error != null)
+                {
+                    //Are we in the US? Check the first.
+                    MessageBox.Show("The service is unavailable, please try again later");
+                    return;
+                }
+                HtmlNode mapURL = doc.DocumentNode.SelectSingleNode("//img[@usemap='#pins']");
+                string mapURLstring = mapURL.Attributes["src"].Value;
+
+                setupRegex();
+
+                Branches = new ObservableCollection<Branch>();
+
+                MatchCollection matches = URLStringRegex.Matches(mapURLstring);
+                createBranchesCollection(doc, matches);
+            }
+        }
         private void callWebsite(Uri uri)
         {
             bingMap.Children.Clear();
-            HtmlWeb web = new HtmlWeb();
-            web.LoadAsync(uri.ToString());
-            web.LoadCompleted += (s, e) =>
-            {
-                if (e.Error == null)
-                {
-                    HtmlDocument doc = e.Document;
-                    HtmlNode error = doc.DocumentNode.SelectSingleNode("//div[@class='copyerror']");
-                    if (error != null)
-                    {
-                        //Are we in the US? Check the first.
-                        MessageBox.Show("The service is unavailable, please try again later");
-                        return;
-                    }
-                    HtmlNode mapURL = doc.DocumentNode.SelectSingleNode("//img[@usemap='#pins']");
-                    string mapURLstring = mapURL.Attributes["src"].Value;
-
-                    setupRegex();
-
-                    Branches = new ObservableCollection<Branch>();
-
-                    MatchCollection matches = URLStringRegex.Matches(mapURLstring);
-                    createBranchesCollection(doc, matches);
-                    setupCentrePushpin();
-                    addPushpinsToMap();
-                    setupMapViewport();
-                    mapLoading.Visibility = System.Windows.Visibility.Collapsed;
-                }
-            };
+            HtmlAgilityPack.HtmlWeb web = new HtmlWeb();
+            CookieContainer cookieContainer = new CookieContainer();
+            HttpWebRequest webRequest = (HttpWebRequest)HttpWebRequest.Create("http://td.info.vianow.net/locator");
+            webRequest.CookieContainer = cookieContainer;
+            webRequest.BeginGetResponse(new AsyncCallback(fakeWebRequestCallback), webRequest);
+            HttpWebRequest webRequest2 = (HttpWebRequest)HttpWebRequest.Create(uri.ToString());
+            webRequest2.CookieContainer = cookieContainer;
+            webRequest2.BeginGetResponse(new AsyncCallback(webRequestCallback), webRequest2);
         }
 
-        private void addPushpinsToMap()
+        private void addPushpinsToMap(Branch branch)
         {
-            foreach (Branch branch in Branches)
+            Pushpin pushpin = new Pushpin()
             {
-                Pushpin pushpin = new Pushpin()
-                {
-                    Location = branch.Location,
-                    Content = branch.Address,
-                    Tag = branch.BranchID
-                };
-                pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
-                App.Branches.Add(branch);
-                bingMap.Children.Add(pushpin);
-            }
+                Location = branch.Location,
+                Content = branch.Address,
+                Tag = branch.BranchID
+            };
+            pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
+            App.Branches.Add(branch);
+            bingMap.Children.Add(pushpin);
         }
 
         private void createBranchesCollection(HtmlDocument doc, MatchCollection matches)
         {
+            Collection<Branch> intBranches = new Collection<Branch>();
             for (int i = 2; i <= 6; i++)
             {
+                String address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]/strong", doc, AddressRegex);
+                string address2 = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]", doc, Address2Regex);
                 string BranchNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]", doc, BranchNumberRegex);
                 string HoursUnformatted = MatchHelper.MatchAndReturnHtml("//tr[@class='table'][" + i + "]/td[4]", doc, HoursRegex);
                 string HoursFormatted = HoursUnformatted.Replace("<br>", "\n");
-                Branch branch = new Branch()
+                iDLookup.Add(address, i);
+                GeocodeServiceClient geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
+                GeocodeRequest request = new GeocodeRequest();
+                request.Credentials = new Credentials() { ApplicationId = key };
+                request.Query = address + " " + address2;
+                geocodeService.GeocodeAsync(request);
+                geocodeService.GeocodeCompleted += (s, e) =>
                 {
-                    MapID = Int32.Parse(MatchHelper.Match("//tr[@class='table'][" + i + "]/td[1]/strong", doc, mapIDNumberRegex)),
-                    BranchID = BranchNumber == "" ? 0 : Int32.Parse(BranchNumber),
-                    PhoneNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[5]", doc, PhoneNumberRegex),
-                    Address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]/strong", doc, AddressRegex),
-                    Hours = HoursFormatted,
-                    Distance = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[3]", doc, DistanceRegex),
-                    Location = new GeoCoordinate
-                    {
-                        Latitude = double.Parse(matches[i - 1].Groups[1].Value),
-                        Longitude = double.Parse(matches[i - 1].Groups[2].Value)
-                    }
+                    GeocodeCompletedEventArgs result = e as GeocodeCompletedEventArgs;
+                    //try
+                    //{
+                    int j = iDLookup[address];
+                        if (result.Result.Results.Count > 0)
+                        {
+                            Branch branch = new Branch()
+                            {
+                                MapID = Int32.Parse(MatchHelper.Match("//tr[@class='table'][" + j + "]/td[1]/strong", doc, mapIDNumberRegex)),
+                                BranchID = BranchNumber == "" ? 0 : Int32.Parse(BranchNumber),
+                                PhoneNumber = MatchHelper.Match("//tr[@class='table'][" + j + "]/td[5]", doc, PhoneNumberRegex),
+                                Address = address,
+                                AddressLine2 = address2,
+                                Hours = HoursFormatted,
+                                Distance = MatchHelper.Match("//tr[@class='table'][" + j + "]/td[3]", doc, DistanceRegex),
+                                Location = new GeoCoordinate()
+                                {
+                                    Latitude = result.Result.Results[0].Locations[0].Latitude,
+                                    Longitude = result.Result.Results[0].Locations[0].Longitude
+                                }
+
+                            };
+                            bingMap.Dispatcher.BeginInvoke(new Action(delegate()
+                            {
+                                Pushpin pushpin = new Pushpin()
+                                {
+                                    Location = branch.Location,
+                                    Content = branch.Address,
+                                    Tag = branch.BranchID
+                                };
+                                pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
+                                bingMap.Children.Add(pushpin); 
+                                mapLoading.Visibility = System.Windows.Visibility.Collapsed;
+                                //setupMapViewport(branch);
+                                //intBranches.Add(branch);
+                            }));
+                            App.Branches.Add(branch);
+                            setupMapViewport(branch);
+                            intBranches.Add(branch); 
+                        }
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    MessageBox.Show(ex.Message);
+                    //}
                 };
-                Branches.Add(branch);
+                Branches = new ObservableCollection<Branch>(intBranches);
             }
         }
 
-        private void setupMapViewport()
+        private void setupMapViewport(Branch branch)
         {
-            double north = Branches[1].Location.Latitude, west = Branches[1].Location.Longitude;
-            double south = Branches[1].Location.Latitude, east = Branches[1].Location.Longitude;
-            foreach (Branch branch in Branches)
+            if (viewportSize == null)
             {
-                north = branch.Location.Latitude > north ? branch.Location.Latitude : north;
-                south = branch.Location.Latitude < south ? branch.Location.Latitude : south;
-                east = branch.Location.Longitude > east ? branch.Location.Longitude : east;
-                west = branch.Location.Longitude < west ? branch.Location.Longitude : west;
+                viewportSize = new LocationRect(branch.Location.Latitude,branch.Location.Longitude,branch.Location.Latitude,branch.Location.Longitude);
+                return;
             }
-            bingMap.SetView(new LocationRect(north, west, south, east));
+            double north = viewportSize.North;
+            double south = viewportSize.South;
+            double east = viewportSize.East;
+            double west = viewportSize.West;
+            viewportSize.North = branch.Location.Latitude > north ? branch.Location.Latitude : north;
+            viewportSize.South = branch.Location.Latitude < south ? branch.Location.Latitude : south;
+            viewportSize.East = branch.Location.Longitude > east ? branch.Location.Longitude : east;
+            viewportSize.West = branch.Location.Longitude < west ? branch.Location.Longitude : west;
+            bingMap.Dispatcher.BeginInvoke(new Action(delegate()
+            {
+                bingMap.SetView(viewportSize);
+            }));
             //TODO: Centre Map using Map's centre and our current position
         }
 
@@ -208,11 +271,14 @@ namespace CanadaTrustv1
             System.Device.Location.GeoCoordinate locator = new System.Device.Location.GeoCoordinate();
             locator.Latitude = coordinateWatcher.Position.Location.Latitude;
             locator.Longitude = coordinateWatcher.Position.Location.Longitude;
-            centreLocation = new Pushpin();
-            centreLocation.Location = locator;
-            centreLocation.Foreground = new SolidColorBrush(Colors.Black);
-            centreLocation.Background = new SolidColorBrush(Colors.Green);
-            bingMap.Children.Add(centreLocation);
+            bingMap.Dispatcher.BeginInvoke(new Action(delegate()
+            {
+                centreLocation = new Pushpin();
+                centreLocation.Location = locator;
+                centreLocation.Foreground = new SolidColorBrush(Colors.Black);
+                centreLocation.Background = new SolidColorBrush(Colors.Green);
+                bingMap.Children.Add(centreLocation);
+            }));
         }
 
         private void setupRegex()
@@ -227,6 +293,8 @@ namespace CanadaTrustv1
             PhoneNumberRegex = new Regex(PhoneNumberPattern, RegexOptions.IgnoreCase);
             string AddressPattern = @"(.*)";
             AddressRegex = new Regex(AddressPattern, RegexOptions.IgnoreCase);
+            string Address2Pattern = @"(\w*, \w\w \w\d\w \d\w\d)";
+            Address2Regex = new Regex(Address2Pattern, RegexOptions.IgnoreCase);
             string HoursPattern = @"(Mon.*PM)";
             HoursRegex = new Regex(HoursPattern, RegexOptions.IgnoreCase);
             string DistancePattern = @"([0-9]*\.[0-9]* km)";
@@ -249,11 +317,12 @@ namespace CanadaTrustv1
 
                 if (consent == MessageBoxResult.OK)
                 {
-                    IsolatedStorageSettings.ApplicationSettings["LocationCosent"] = true;
+                    IsolatedStorageSettings.ApplicationSettings["LocationConsent"] = true;
                 }
                 else
                 {
                     MessageBox.Show("Currently, this app requires location services to function. If you would like to enable location services, you can do so from the settings menu.", "Location Services Required.", MessageBoxButton.OK);
+                    IsolatedStorageSettings.ApplicationSettings["LocationConsent"] = false;
                     return;
                 }
             }

@@ -43,10 +43,9 @@ namespace CanadaTrustv1
         private void Address_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             LabeledMapLocation mapLocation = new LabeledMapLocation() {
-                Label = Branch.Address,
+                Label = Branch.Address + " " + Branch.AddressLine2,
                 Location = Branch.Location
             };
-            TextBlock address = sender as TextBlock;
             BingMapsDirectionsTask directionTask = new BingMapsDirectionsTask();
             directionTask.End = mapLocation;
             directionTask.Show();
