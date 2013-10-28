@@ -6,9 +6,17 @@
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
+                <binding name="BasicHttpBinding_IGeocodeService1" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
             </basicHttpBinding>
             <customBinding>
                 <binding name="CustomBinding_IGeocodeService">
+                    <binaryMessageEncoding />
+                    <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
+                </binding>
+                <binding name="CustomBinding_IGeocodeService1">
                     <binaryMessageEncoding />
                     <httpTransport maxReceivedMessageSize="2147483647" maxBufferSize="2147483647" />
                 </binding>
@@ -21,6 +29,12 @@
             <endpoint address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc/binaryHttp"
                 binding="customBinding" bindingConfiguration="CustomBinding_IGeocodeService"
                 contract="BingMapsGeocodeService.IGeocodeService" name="CustomBinding_IGeocodeService" />
+            <endpoint address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IGeocodeService1"
+                contract="GeocodeService.IGeocodeService" name="BasicHttpBinding_IGeocodeService1" />
+            <endpoint address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc/binaryHttp"
+                binding="customBinding" bindingConfiguration="CustomBinding_IGeocodeService1"
+                contract="GeocodeService.IGeocodeService" name="CustomBinding_IGeocodeService1" />
         </client>
     </system.serviceModel>
 </configuration>
