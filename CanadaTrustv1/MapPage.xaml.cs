@@ -332,14 +332,12 @@ namespace CanadaTrustv1
                 return;
             }
             mapLoading.Visibility = System.Windows.Visibility.Collapsed;
-            AdRotatorControl.Invalidate();
             base.OnNavigatedTo(e);
             coordinateWatcher.Start();
         }
 
         protected override void OnNavigatingFrom(System.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            AdRotatorControl.Dispose();
             base.OnNavigatingFrom(e);
             coordinateWatcher.Stop();
         }

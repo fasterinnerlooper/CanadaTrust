@@ -64,17 +64,5 @@ namespace CanadaTrustv1
         {
             AdRotatorControl.Invalidate();
         }
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            AdRotatorControl.Invalidate();
-            base.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatingFrom(System.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
-            AdRotatorControl.Dispose();
-            base.OnNavigatingFrom(e);
-        }
     }
 }
