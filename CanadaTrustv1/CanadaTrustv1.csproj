@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CanadaTrustv1</RootNamespace>
-    <AssemblyName>MyBranchLocator</AssemblyName>
+    <AssemblyName>TDBranchLocator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
@@ -19,7 +19,7 @@
     <SupportedCultures>en-CA</SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>MyBranchLocator.xap</XapFilename>
+    <XapFilename>TDBranchLocator.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>CanadaTrustv1.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
@@ -117,6 +117,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\GeocodeService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -143,6 +148,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\GeocodeService\configuration91.svcinfo" />
+    <None Include="Service References\GeocodeService\configuration.svcinfo" />
+    <None Include="Service References\GeocodeService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -175,6 +186,13 @@
     <Content Include="Images\appbar_button1.png" />
     <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Service References\BingMapsGeocodeService\service2.xsd" />
+    <None Include="Service References\GeocodeService\GeocodeService.wsdl" />
+    <None Include="Service References\GeocodeService\GeocodeService.xsd" />
+    <None Include="Service References\GeocodeService\GeocodeService1.wsdl" />
+    <None Include="Service References\GeocodeService\GeocodeService1.xsd" />
+    <None Include="Service References\GeocodeService\GeocodeService2.xsd" />
+    <None Include="Service References\GeocodeService\GeocodeService3.xsd" />
+    <None Include="Service References\GeocodeService\GeocodeService4.xsd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Background.png">
@@ -197,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\BingMapsGeocodeService\" />
+    <WCFMetadataStorage Include="Service References\GeocodeService\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
