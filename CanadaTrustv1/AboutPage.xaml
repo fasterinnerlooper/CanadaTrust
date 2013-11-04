@@ -50,6 +50,15 @@
                         Margin="0,20,0,0"
                         >Changes</TextBlock>
                         <TextBlock>
+                            <Run Text="Version 1.1.0.1:"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="• Added Rate &amp; Review link" />
+                            <LineBreak/>
+                            <Run Text="  Please consider rating this app" />
+                            <LineBreak/>
+                        </TextBlock>
+                        <TextBlock>
                             <Run Text="Version 1.1.0.0:"/>
                         </TextBlock>
                         <TextBlock>
