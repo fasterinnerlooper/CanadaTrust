@@ -369,5 +369,11 @@ namespace CanadaTrustv1
         {
             NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
         }
+
+        private void ApplicationBarIconButton_RateClick(object sender, EventArgs e)
+        {
+            var rateTask = new MarketplaceReviewTask();
+            rateTask.Show();
+        }
     }
 }
