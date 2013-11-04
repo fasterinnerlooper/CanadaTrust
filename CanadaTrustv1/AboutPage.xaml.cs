@@ -45,5 +45,11 @@ namespace CanadaTrustv1
             };
             composerTask.Show();
         }
+
+        private void ApplicationBarIconButton_RateClick(object sender, EventArgs e)
+        {
+            var rateTask = new MarketplaceReviewTask();
+            rateTask.Show();
+        }
     }
 }
