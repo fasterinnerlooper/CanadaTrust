@@ -47,41 +47,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdDuplex.WindowsPhone">
+    <Reference Include="AdDuplex.WindowsPhone, Version=2.7.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AdDuplexWP7.2.7.0.3\lib\sl4-windowsphone71\AdDuplex.WindowsPhone.dll</HintPath>
-    </Reference>
-    <Reference Include="AdRotator">
-      <HintPath>..\packages\AdRotatorWP.1.0.3\lib\sl4-wp71\AdRotator.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.AdMob.Ads.WindowsPhone7">
-      <HintPath>..\packages\AdRotatorWP.1.0.3\lib\sl4-wp71\Google.AdMob.Ads.WindowsPhone7.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\sl4-windowsphone71\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="Inneractive.Nokia.Ad">
-      <HintPath>..\packages\AdRotatorWP.1.0.3\lib\sl4-wp71\Inneractive.Nokia.Ad.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Advertising.Mobile">
-      <HintPath>..\packages\AdRotatorWP.1.0.3\lib\sl4-wp71\Microsoft.Advertising.Mobile.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Advertising.Mobile.UI">
-      <HintPath>..\packages\AdRotatorWP.1.0.3\lib\sl4-wp71\Microsoft.Advertising.Mobile.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Phone" />
-    <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Maps, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
-    <Reference Include="MobFox.Ads">
-      <HintPath>..\packages\AdRotatorWP.1.0.3\lib\sl4-wp71\MobFox.Ads.dll</HintPath>
-    </Reference>
-    <Reference Include="SOMAWP7">
-      <HintPath>..\packages\AdRotatorWP.1.0.3\lib\sl4-wp71\SOMAWP7.dll</HintPath>
-    </Reference>
     <Reference Include="System.Device" />
+    <Reference Include="System.Observable" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows" />
