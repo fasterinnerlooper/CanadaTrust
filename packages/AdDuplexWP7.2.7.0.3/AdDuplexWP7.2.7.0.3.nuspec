@@ -14,8 +14,5 @@
     <copyright>AdDuplex</copyright>
     <language />
     <tags>wp7 windowsphone</tags>
-    <references>
-      <reference file="AdDuplex.WindowsPhone.dll" />
-    </references>
   </metadata>
 </package>
