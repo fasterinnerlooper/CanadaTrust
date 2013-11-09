@@ -348,11 +348,6 @@ namespace CanadaTrustv1
             mapLoadingTextBlock.Text = "Updating";
         }
 
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            AdRotatorControl.Invalidate();
-        }
-
         private void ApplicationBarIconButton_MainClick(object sender, EventArgs e)
         {
             WebBrowserTask webBrowserTask = new WebBrowserTask();

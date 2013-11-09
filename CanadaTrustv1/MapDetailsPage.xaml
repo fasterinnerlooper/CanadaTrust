@@ -6,14 +6,13 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:adRotator="clr-namespace:AdRotator;assembly=AdRotator"
+    xmlns:adDuplex="clr-namespace:AdDuplex;assembly=AdDuplex.WindowsPhone"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True"
-    Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -37,19 +36,9 @@
                 <TextBlock x:Name="PhoneNumber" Tap="PhoneNumber_Tap" Margin="20,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" />
             </StackPanel>
         </Grid>
-        <adRotator:AdRotatorControl x:Name="AdRotatorControl"
-                DefaultAdType="AdDuplex"
-                AdDuplexAppId="44087"
-                PubCenterAppId="518c7-44fd-4c5c-af09-2e3e68a7fa65"
-                PubCenterAdUnitId="137213"
-                SmaatoPublisherId="923873664"
-                SmaatoAppId="65817715"
-                SlidingAdDirection="None"
-                SlidingAdDisplaySeconds="20"
-                Margin="0,2"
-                Grid.Row="1"
-                Height="80"
-                Width="480"
-                VerticalAlignment="Top"/>
+        <adDuplex:AdControl Grid.Row="1"
+                            Height="480"
+                            Width="80"
+                            AppId="44087" />
     </Grid>
 </phone:PhoneApplicationPage>

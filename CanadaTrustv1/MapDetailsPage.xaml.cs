@@ -59,10 +59,5 @@ namespace CanadaTrustv1
             phoneTask.PhoneNumber = number.Text;
             phoneTask.Show();
         }
-
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            AdRotatorControl.Invalidate();
-        }
     }
 }
