@@ -32,8 +32,7 @@
                                  Grid.Row="0"
                                  Height="80"
                                  Width="480"/>
-
-                <Grid Grid.Row="1">
+            <Grid Grid.Row="1">
                 <BingMap:Map Name="bingMap"
                          Width="Auto"
                          CopyrightVisibility="Visible"
@@ -44,15 +43,6 @@
                     <BingMap:Map.Center>
                         <my:GeoCoordinate Latitude="71.75" Longitude="-97" />
                     </BingMap:Map.Center>
-                    <BingMap:MapItemsControl x:Name="mapItemsControl">
-                        <BingMap:MapItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <BingMap:Pushpin Tap="pushpin_Tap"
-                                                 Location="{Binding Location}"
-                                                 Content="{Binding PhoneNumber}"/>
-                            </DataTemplate>
-                        </BingMap:MapItemsControl.ItemTemplate>
-                    </BingMap:MapItemsControl>
                 </BingMap:Map>
                 <Grid
                     x:Name="mapLoading"
