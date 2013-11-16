@@ -12,7 +12,6 @@
     <releaseNotes>- BUGFIX: ArgumentException was sometimes thrown by the control
 - BUGFIX: the control was loading ads even when Collapsed and then reporting the "obstructed" error</releaseNotes>
     <copyright>AdDuplex</copyright>
-    <language />
     <tags>wp7 windowsphone</tags>
   </metadata>
 </package>
