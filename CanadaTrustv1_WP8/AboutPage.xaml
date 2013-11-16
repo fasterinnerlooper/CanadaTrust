@@ -24,16 +24,6 @@
         </Grid.RowDefinitions>
 
         <controls:Pivot Grid.Row="1">
-            <controls:PivotItem Header="about">
-                <!--ContentPanel - place additional content here-->
-                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                    <TextBlock TextWrapping="Wrap">
-                App created and developed by Shafiq Jetha.<LineBreak/><LineBreak/>
-                Thanks to toetapz and the noun project for icons and coding examples.<LineBreak/><LineBreak/>
-                Packages used:<LineBreak/>HtmlAgilityPack
-                    </TextBlock>
-                </Grid>
-            </controls:PivotItem>
             <controls:PivotItem Header="what's new?">
                 <ScrollViewer>
                     <StackPanel Margin="0">
@@ -49,6 +39,13 @@
                         Style="{StaticResource PhoneTextExtraLargeStyle}"
                         Margin="0,20,0,0"
                         >Changes</TextBlock>
+                        <TextBlock>
+                            <Run Text="Version 1.2.0.0:"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="• Added Windows Phone 8 version" />
+                            <LineBreak/>
+                        </TextBlock>
                         <TextBlock>
                             <Run Text="Version 1.1.0.1:"/>
                         </TextBlock>
@@ -130,6 +127,16 @@
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
+            </controls:PivotItem>
+            <controls:PivotItem Header="about">
+                <!--ContentPanel - place additional content here-->
+                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <TextBlock TextWrapping="Wrap">
+                App created and developed by Shafiq Jetha.<LineBreak/><LineBreak/>
+                Thanks to toetapz and the noun project for icons and coding examples.<LineBreak/><LineBreak/>
+                Packages used:<LineBreak/>HtmlAgilityPack
+                    </TextBlock>
+                </Grid>
             </controls:PivotItem>
             <controls:PivotItem Header="Privacy Policy">
                 <ScrollViewer HorizontalAlignment="Left" Height="562" VerticalAlignment="Top" Width="456">
