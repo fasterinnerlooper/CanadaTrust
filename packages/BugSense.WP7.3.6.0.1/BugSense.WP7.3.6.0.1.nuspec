@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>BugSense.WP7</id>
+    <version>3.6.0.1</version>
+    <title>BugSense plugin for Windows Phone 7</title>
+    <authors>BugSense</authors>
+    <owners>BugSense</owners>
+    <projectUrl>https://www.bugsense.com/docs/windowsphone#wp7doc</projectUrl>
+    <iconUrl>http://www.panicnot.com/image/bugsense-min-in.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>BugSense is the leading crash reposrting and quality metrics service for mobile apps. This is the official plugin for Windows Phone 7.</description>
+    <releaseNotes>New rewritten SDK from scratch. Check the documentation for details.</releaseNotes>
+    <copyright>Copyright 2013-14</copyright>
+    <tags>windowsphone7 wp7 bugsense crash reports windows quality metrics errors c#</tags>
+    <dependencies>
+      <dependency id="Microsoft.Bcl" />
+      <dependency id="Microsoft.Bcl.Async" />
+      <dependency id="Microsoft.Bcl.Build" />
+    </dependencies>
+  </metadata>
+</package>

@@ -27,11 +27,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <pubcenter:AdControl AdUnitId="148140"
-                                 ApplicationId="052ac666-86f3-406c-a3e0-462082875f4a"
-                                 Grid.Row="0"
-                                 Height="80"
-                                 Width="480"/>
             <Grid Grid.Row="1">
                 <BingMap:Map Name="bingMap"
                          Width="Auto"

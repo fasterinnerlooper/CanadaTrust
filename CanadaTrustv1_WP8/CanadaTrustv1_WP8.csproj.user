@@ -3,6 +3,7 @@
   <PropertyGroup>
     <CurrentDeployCmdId />
     <CurrentDeployID />
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

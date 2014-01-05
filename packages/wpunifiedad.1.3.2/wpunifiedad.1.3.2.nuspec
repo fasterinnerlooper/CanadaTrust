@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>wpunifiedad</id>
+    <version>1.3.2</version>
+    <title>Unified Ad Control for Windows Phone</title>
+    <authors>Mark Monster - Monster Consultancy</authors>
+    <owners>Mark Monster - Monster Consultancy</owners>
+    <licenseUrl>http://wpunifiedad.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wpunifiedad.codeplex.com/</projectUrl>
+    <iconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=wpunifiedad&amp;DownloadId=364230&amp;Build=19132</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Unified Ad Control for Windows Phone which rotates around:
+- PubCenter
+- AdMob
+- Smaato
+- MobFox
+- AdDuplex
+- InnerActive
+- MillennialMedia
+- None
+- GenericAdProviderForXaml</description>
+    <summary>Microsoft Public License (Ms-PL)</summary>
+    <releaseNotes>- Improved the MillennialMedia adprovider, it's no longer experimental
+- Fixed a couple of issues
+- Update Smaato SDK</releaseNotes>
+    <language>en-US</language>
+    <tags>wp7 wpdev ad adrotator wpunifiedad unifiedad PubCenter AdMob Smaato MobFox AdDuplex xaml millenialmedia inneractive</tags>
+    <dependencies>
+      <dependency id="AdDuplexWP7" version="2.7.0.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Observable" targetFramework="Silverlight4.0-WindowsPhone" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

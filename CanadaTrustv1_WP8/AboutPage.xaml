@@ -131,11 +131,15 @@
             <controls:PivotItem Header="about">
                 <!--ContentPanel - place additional content here-->
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                    <TextBlock TextWrapping="Wrap">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap">
                 App created and developed by Shafiq Jetha.<LineBreak/><LineBreak/>
                 Thanks to toetapz and the noun project for icons and coding examples.<LineBreak/><LineBreak/>
-                Packages used:<LineBreak/>HtmlAgilityPack
-                    </TextBlock>
+                Packages used:<LineBreak/>HtmlAgilityPack<LineBreak/>
+                        </TextBlock>
+                        <TextBlock>Consider Donating fund to help the developer:</TextBlock>
+                        <HyperlinkButton Click="HyperlinkButton_Click">Donate through paypal</HyperlinkButton>
+                    </StackPanel>
                 </Grid>
             </controls:PivotItem>
             <controls:PivotItem Header="Privacy Policy">
