@@ -197,7 +197,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Ads\AdSettings.xml" />
     <None Include="WP-Unified-Ad-HowTo.txt" />
     <None Include="Ads\UnifiedAd.xsd" />
     <None Include="Service References\GeocodeService\configuration91.svcinfo" />
@@ -207,13 +206,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Assets\Waterhouse.xml" />
-    <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
-    <None Include="CanadaTrustv1_2013_07_26_17_31_20.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml">
       <SubType>Designer</SubType>
@@ -271,7 +268,9 @@
     <WCFMetadataStorage Include="Service References\BingMapsGeocodeService\" />
     <WCFMetadataStorage Include="Service References\GeocodeService\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BugSense\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
