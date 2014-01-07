@@ -7,8 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:System.Device.Location;assembly=System.Device"
+    xmlns:ads="clr-namespace:MC.Phone.Ads;assembly=MC.Phone.Ads"
     xmlns:BingMap="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
-    xmlns:pubcenter="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -27,6 +27,20 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <ads:AdControl
+            Grid.Row="0"
+            Height="80"
+            Width="480"
+            FallbackAdProviderName="AdDuplex"
+            xmlns:pubcentre="clr-namespace:MC.Phone.Ads.PubCenter;assembly=MC.Phone.Ads.PubCenter"
+            xmlns:adduplex="clr-namespace:MC.Phone.Ads.AdDuplex;assembly=MC.Phone.Ads.AdDuplex"
+            xmlns:smaato="clr-namespace:MC.Phone.Ads.Smaato;assembly=MC.Phone.Ads.Smaato">
+                <ads:AdControl.AdProviders>
+                    <smaato:SmaatoAdProvider Publisher="923873664" AdSpace="65817715" />
+                    <pubcentre:PubCenterAdProvider Application="a7564908-017a-41df-9bd6-d63773a9545e" AdUnit="148140" />
+                    <adduplex:AdDuplexAdProvider App="44087" />
+                </ads:AdControl.AdProviders>
+            </ads:AdControl>
             <Grid Grid.Row="1">
                 <BingMap:Map Name="bingMap"
                          Width="Auto"

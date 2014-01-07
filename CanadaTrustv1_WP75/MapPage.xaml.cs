@@ -331,6 +331,17 @@ namespace CanadaTrustv1
                 MessageBox.Show("Currently, this app requires location services to function. If you would like to enable location services, you can do so from the settings menu.", "Location Services required", MessageBoxButton.OK);
                 return;
             }
+            int TimesRun = IsolatedStorageSettings.ApplicationSettings.Contains("TimesRun") ? (int) IsolatedStorageSettings.ApplicationSettings["TimesRun"] : 0;
+            if (TimesRun == 3 || TimesRun - 3 % 5 == 0)
+            {
+                MessageBoxResult consent = MessageBox.Show("Please consider rating and reviewing this app. Plese tap 'OK' to be taken to the marketplace screen", "Rate and review", MessageBoxButton.OKCancel);
+                if (consent == MessageBoxResult.OK)
+                {
+                    var rateTask = new MarketplaceReviewTask();
+                    rateTask.Show();
+                }
+            }
+            IsolatedStorageSettings.ApplicationSettings["TimesRun"] = ++TimesRun;
             mapLoading.Visibility = System.Windows.Visibility.Collapsed;
             base.OnNavigatedTo(e);
             coordinateWatcher.Start();
