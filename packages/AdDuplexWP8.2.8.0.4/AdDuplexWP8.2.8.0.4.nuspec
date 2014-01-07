@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>AdDuplexWP8</id>
+    <version>2.8.0.4</version>
+    <title>AdDuplex for Windows Phone</title>
+    <authors>AdDuplex</authors>
+    <owners>AdDuplex</owners>
+    <licenseUrl>http://adduplex.com/</licenseUrl>
+    <projectUrl>http://adduplex.com/</projectUrl>
+    <iconUrl>http://files.adduplex.com/images/ax-32x32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>AdDuplex (cross-promotion network for Windows Phone and Windows 8 apps) SDK for XAML based Windows Phone apps.</description>
+    <releaseNotes>BUGFIX: NullReferenceException was sometimes thrown by the control; Merged both wp7 and wp8 controls into one NuGet package.</releaseNotes>
+    <copyright>AdDuplex</copyright>
+    <language />
+  </metadata>
+</package>

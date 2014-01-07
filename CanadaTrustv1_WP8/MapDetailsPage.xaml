@@ -40,15 +40,14 @@
             Grid.Row="1"
             Height="80"
             Width="480"
+            FallbackAdProviderName="AdDuplex"
             xmlns:pubcentre="clr-namespace:MC.Phone.Ads.PubCenter;assembly=MC.Phone.Ads.PubCenter"
             xmlns:adduplex="clr-namespace:MC.Phone.Ads.AdDuplex;assembly=MC.Phone.Ads.AdDuplex"
-            xmlns:admob="clr-namespace:MC.Phone.Ads.AdMob;assembly=MC.Phone.Ads.AdMob"
             xmlns:smaato="clr-namespace:MC.Phone.Ads.Smaato;assembly=MC.Phone.Ads.Smaato">
             <ads:AdControl.AdProviders>
-                <adduplex:AdDuplexAdProvider App="" />
-                <admob:AdMobAdProvider AdUnit="ca-app-pub-1143879342234656/9882693308"/>
-                <pubcentre:PubCenterAdProvider Application="a7564908-017a-41df-9bd6-d63773a9545e" AdUnit="148140"/>
+                <pubcentre:PubCenterAdProvider Application="a7564908-017a-41df-9bd6-d63773a9545e" AdUnit="148140" />
                 <smaato:SmaatoAdProvider Publisher="923873664" AdSpace="65817715" />
+                <adduplex:AdDuplexAdProvider App="44087" />
             </ads:AdControl.AdProviders>
         </ads:AdControl>
     </Grid>
