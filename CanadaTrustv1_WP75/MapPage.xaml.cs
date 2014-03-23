@@ -181,12 +181,15 @@ namespace CanadaTrustv1
             Collection<Branch> intBranches = new Collection<Branch>();
             for (int i = 2; i <= 6; i++)
             {
-                String address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]/strong", doc, AddressRegex);
-                string address2 = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]", doc, Address2Regex);
-                string BranchNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]", doc, BranchNumberRegex);
-                string HoursUnformatted = MatchHelper.MatchAndReturnHtml("//tr[@class='table'][" + i + "]/td[4]", doc, HoursRegex);
+                string address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//strong", doc, AddressRegex);
+                string address2 = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc, Address2Regex);
+                string BranchNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc, BranchNumberRegex);
+                string HoursUnformatted = MatchHelper.MatchAndReturnHtml("//tr[@class='table'][" + i + "]/td[4]//.", doc, HoursRegex);
                 string HoursFormatted = HoursUnformatted.Replace("<br>", "\n");
-                iDLookup.Add(address, i);
+                if (!iDLookup.ContainsKey(address))
+                {
+                    iDLookup.Add(address, i);
+                }
                 GeocodeServiceClient geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
                 GeocodeRequest request = new GeocodeRequest();
                 request.Credentials = new Credentials() { ApplicationId = key };
@@ -380,6 +383,13 @@ namespace CanadaTrustv1
         {
             var rateTask = new MarketplaceReviewTask();
             rateTask.Show();
+        }
+
+        private void ApplicationBarMenuItem_FeedbackClick(object sender, EventArgs e)
+        {
+            WebBrowserTask wbTask = new WebBrowserTask();
+            wbTask.Uri = new Uri("http://sjetha.uservoice.com");
+            wbTask.Show();
         }
     }
 }

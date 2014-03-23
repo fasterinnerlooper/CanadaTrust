@@ -72,6 +72,7 @@
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_AboutClick" />
                 <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarMenuItem_SettingsClick" />
                 <shell:ApplicationBarMenuItem Text="Rate &amp; Review" Click="ApplicationBarIconButton_RateClick" />
+                <shell:ApplicationBarMenuItem Text="Feedback &amp; Suggestions" Click="ApplicationBarMenuItem_FeedbackClick" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

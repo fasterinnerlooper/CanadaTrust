@@ -13,6 +13,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using CanadaTrustv1.Models;
+using BugSense;
+using BugSense.Core.Model;
 
 namespace CanadaTrustv1
 {
@@ -31,8 +33,9 @@ namespace CanadaTrustv1
         /// </summary>
         public App()
         {
-            // Global handler for uncaught exceptions. 
-            UnhandledException += Application_UnhandledException;
+            // Initialize BugSense
+            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), "243a5892");
+            // Other Windows Store specific operations
 
             // Standard Silverlight initialization
             InitializeComponent();

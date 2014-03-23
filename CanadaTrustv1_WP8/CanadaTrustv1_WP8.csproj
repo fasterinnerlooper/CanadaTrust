@@ -169,6 +169,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CanadaTrustv1_WP75\AboutPage.xaml.cs">
+      <Link>AboutPage.xaml.cs</Link>
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\CanadaTrustv1_WP75\Settings.xaml.cs">
       <Link>Settings.xaml.cs</Link>
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -203,6 +207,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="..\CanadaTrustv1_WP75\AboutPage.xaml">
+      <Link>AboutPage.xaml</Link>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\CanadaTrustv1_WP75\Settings.xaml">
       <Link>Settings.xaml</Link>
       <SubType>Designer</SubType>

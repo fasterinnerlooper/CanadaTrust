@@ -181,12 +181,15 @@ namespace CanadaTrustv1
             Collection<Branch> intBranches = new Collection<Branch>();
             for (int i = 2; i <= 6; i++)
             {
-                String address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]/strong", doc, AddressRegex);
-                string address2 = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]", doc, Address2Regex);
-                string BranchNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]", doc, BranchNumberRegex);
-                string HoursUnformatted = MatchHelper.MatchAndReturnHtml("//tr[@class='table'][" + i + "]/td[4]", doc, HoursRegex);
+                string address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//strong", doc, AddressRegex);
+                string address2 = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc, Address2Regex);
+                string BranchNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc, BranchNumberRegex);
+                string HoursUnformatted = MatchHelper.MatchAndReturnHtml("//tr[@class='table'][" + i + "]/td[4]//.", doc, HoursRegex);
                 string HoursFormatted = HoursUnformatted.Replace("<br>", "\n");
-                iDLookup.Add(address, i);
+                if (!iDLookup.ContainsKey(address))
+                {
+                    iDLookup.Add(address, i);
+                }
                 GeocodeServiceClient geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
                 GeocodeRequest request = new GeocodeRequest();
                 request.Credentials = new Credentials() { ApplicationId = key };
@@ -331,6 +334,17 @@ namespace CanadaTrustv1
                 MessageBox.Show("Currently, this app requires location services to function. If you would like to enable location services, you can do so from the settings menu.", "Location Services required", MessageBoxButton.OK);
                 return;
             }
+            int TimesRun = IsolatedStorageSettings.ApplicationSettings.Contains("TimesRun") ? (int)IsolatedStorageSettings.ApplicationSettings["TimesRun"] : 0;
+            if (TimesRun == 3 || TimesRun - 3 % 5 == 0)
+            {
+                MessageBoxResult consent = MessageBox.Show("Please consider rating and reviewing this app. Plese tap 'OK' to be taken to the marketplace screen", "Rate and review", MessageBoxButton.OKCancel);
+                if (consent == MessageBoxResult.OK)
+                {
+                    var rateTask = new MarketplaceReviewTask();
+                    rateTask.Show();
+                }
+            }
+            IsolatedStorageSettings.ApplicationSettings["TimesRun"] = ++TimesRun;
             mapLoading.Visibility = System.Windows.Visibility.Collapsed;
             base.OnNavigatedTo(e);
             coordinateWatcher.Start();
@@ -369,6 +383,13 @@ namespace CanadaTrustv1
         {
             var rateTask = new MarketplaceReviewTask();
             rateTask.Show();
+        }
+
+        private void ApplicationBarMenuItem_FeedbackClick(object sender, EventArgs e)
+        {
+            WebBrowserTask wbTask = new WebBrowserTask();
+            wbTask.Uri = new Uri("http://sjetha.uservoice.com");
+            wbTask.Show();
         }
     }
 }

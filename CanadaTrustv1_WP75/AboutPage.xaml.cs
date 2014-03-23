@@ -11,6 +11,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using System.Text;
+using System.IO;
+using System.Diagnostics;
 
 namespace CanadaTrustv1
 {
@@ -50,6 +53,14 @@ namespace CanadaTrustv1
         {
             var rateTask = new MarketplaceReviewTask();
             rateTask.Show();
+        }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VBLDYK7GBVUF6&lc=CA&item_name=TD%20Canada%20Trust&currency_code=CAD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+            WebBrowserTask webBrowserTask = new WebBrowserTask();
+            webBrowserTask.Uri = uri;
+            webBrowserTask.Show();
         }
     }
 }
