@@ -24,23 +24,7 @@ namespace CanadaTrustv1.Models
                 fullAddress = dummyFullAddress;
             }
         }
-        private string branchSearch = "Branch";
-        private string abmSearch = "Abm";
-        private string searchCustom__openSat = "";
-        private string searchCustom__openSun = "";
-        private string searchCustom__coinCounter = "";
-        private string searchCustom__openAfterSix = "";
-        private string searchCustom__openSunPreset = "FALSE";
-        private string searchCustom__openSatPreset = "TRUE";
-        private string searchCustom__wheelType = "";
         private string fullAddress = "";
-        private string originalSearchValue = "";
-        private string country = "Canada";
-        private string mapAndList = "mapAndList";
-        private string searchCustom__transitNumber = "";
-        private string searchCustom__searchBy = "";
-        private int locationX = 31;
-        private int locationY = 10;
 
         public TDLocatorRequest()
         {

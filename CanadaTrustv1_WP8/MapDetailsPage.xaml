@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ads="clr-namespace:MC.Phone.Ads;assembly=MC.Phone.Ads"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -35,25 +36,19 @@
                 <TextBlock x:Name="PhoneNumber" Tap="PhoneNumber_Tap" Margin="20,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" />
             </StackPanel>
         </Grid>
-        <Ads:AdControl
+        <ads:AdControl
             Grid.Row="1"
             Height="80"
             Width="480"
             FallbackAdProviderName="AdDuplex"
-            xmlns:Ads="clr-namespace:MC.Phone.Ads;assembly=MC.Phone.Ads"
-            xmlns:PubCenter="clr-namespace:MC.Phone.Ads.PubCenter;assembly=MC.Phone.Ads.PubCenter"
-            xmlns:Smaato="clr-namespace:MC.Phone.Ads.Smaato;assembly=MC.Phone.Ads.Smaato"
-            xmlns:AdMob="clr-namespace:MC.Phone.Ads.AdMob;assembly=MC.Phone.Ads.AdMob"
-            xmlns:AdDuplex="clr-namespace:MC.Phone.Ads.AdDuplex;assembly=MC.Phone.Ads.AdDuplex"
-            >
-            <Ads:AdControl.AdProviders>
-                <AdMob:AdMobAdProvider AdUnit="ca-app-pub-1143879342234656/9882693308" />
-                <Smaato:SmaatoAdProvider AdSpace="65817715"
-                                    Publisher="923873664" />
-                <PubCenter:PubCenterAdProvider Application="a7564908-017a-41df-9bd6-d63773a9545e"
-                                        AdUnit="148140" />
-                <AdDuplex:AdDuplexAdProvider App="44087" />
-            </Ads:AdControl.AdProviders>
-        </Ads:AdControl>
+            xmlns:pubcentre="clr-namespace:MC.Phone.Ads.PubCenter;assembly=MC.Phone.Ads.PubCenter"
+            xmlns:adduplex="clr-namespace:MC.Phone.Ads.AdDuplex;assembly=MC.Phone.Ads.AdDuplex"
+            xmlns:smaato="clr-namespace:MC.Phone.Ads.Smaato;assembly=MC.Phone.Ads.Smaato">
+            <ads:AdControl.AdProviders>
+                <pubcentre:PubCenterAdProvider Application="a7564908-017a-41df-9bd6-d63773a9545e" AdUnit="148140" />
+                <smaato:SmaatoAdProvider Publisher="923873664" AdSpace="65817715" />
+                <adduplex:AdDuplexAdProvider App="44087" />
+            </ads:AdControl.AdProviders>
+        </ads:AdControl>
     </Grid>
 </phone:PhoneApplicationPage>

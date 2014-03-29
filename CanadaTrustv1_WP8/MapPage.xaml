@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:System.Device.Location;assembly=System.Device"
+    xmlns:ads="clr-namespace:MC.Phone.Ads;assembly=MC.Phone.Ads"
     xmlns:BingMap="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -18,36 +19,29 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--ContentPanel - place additional content here-->
-        <Ads:AdControl
-                Grid.Row="0"
-                Height="80"
-                Width="480"
-                xmlns:Ads="clr-namespace:MC.Phone.Ads;assembly=MC.Phone.Ads"
-                xmlns:PubCenter="clr-namespace:MC.Phone.Ads.PubCenter;assembly=MC.Phone.Ads.PubCenter"
-                xmlns:Smaato="clr-namespace:MC.Phone.Ads.Smaato;assembly=MC.Phone.Ads.Smaato"
-                xmlns:AdMob="clr-namespace:MC.Phone.Ads.AdMob;assembly=MC.Phone.Ads.AdMob"
-                xmlns:AdDuplex="clr-namespace:MC.Phone.Ads.AdDuplex;assembly=MC.Phone.Ads.AdDuplex"
-                >
-            <Ads:AdControl.AdProviders>
-                <AdMob:AdMobAdProvider AdUnit="ca-app-pub-1143879342234656/9882693308" />
-                <Smaato:SmaatoAdProvider AdSpace="65817715"
-                                    Publisher="923873664" />
-                <PubCenter:PubCenterAdProvider Application="a7564908-017a-41df-9bd6-d63773a9545e"
-                                        AdUnit="148140" />
-                <AdDuplex:AdDuplexAdProvider App="44087" />
-
-            </Ads:AdControl.AdProviders>
-        </Ads:AdControl>
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-            </Grid.RowDefinitions> 
-                <Grid Grid.Row="1">
+            </Grid.RowDefinitions>
+            <ads:AdControl
+            Grid.Row="0"
+            Height="80"
+            Width="480"
+            FallbackAdProviderName="AdDuplex"
+            xmlns:pubcentre="clr-namespace:MC.Phone.Ads.PubCenter;assembly=MC.Phone.Ads.PubCenter"
+            xmlns:adduplex="clr-namespace:MC.Phone.Ads.AdDuplex;assembly=MC.Phone.Ads.AdDuplex"
+            xmlns:smaato="clr-namespace:MC.Phone.Ads.Smaato;assembly=MC.Phone.Ads.Smaato">
+                <ads:AdControl.AdProviders>
+                    <smaato:SmaatoAdProvider Publisher="923873664" AdSpace="65817715" />
+                    <pubcentre:PubCenterAdProvider Application="a7564908-017a-41df-9bd6-d63773a9545e" AdUnit="148140" />
+                    <adduplex:AdDuplexAdProvider App="44087" />
+                </ads:AdControl.AdProviders>
+            </ads:AdControl>
+            <Grid Grid.Row="1">
                 <BingMap:Map Name="bingMap"
                          Width="Auto"
                          CopyrightVisibility="Visible"
@@ -58,15 +52,6 @@
                     <BingMap:Map.Center>
                         <my:GeoCoordinate Latitude="71.75" Longitude="-97" />
                     </BingMap:Map.Center>
-                    <BingMap:MapItemsControl x:Name="mapItemsControl">
-                        <BingMap:MapItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <BingMap:Pushpin Tap="pushpin_Tap"
-                                                 Location="{Binding Location}"
-                                                 Content="{Binding PhoneNumber}"/>
-                            </DataTemplate>
-                        </BingMap:MapItemsControl.ItemTemplate>
-                    </BingMap:MapItemsControl>
                 </BingMap:Map>
                 <Grid
                     x:Name="mapLoading"

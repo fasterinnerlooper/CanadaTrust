@@ -150,8 +150,9 @@
     <Reference Include="Microsoft.Phone.Controls.Maps, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL">
       <HintPath>..\packages\wpunifiedad.1.3.2\lib\sl4-wp71\Microsoft.Phone.Controls.Maps.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Phone.Controls.Toolkit">
-      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="MillennialMedia.WP7.SDK">
       <HintPath>..\packages\wpunifiedad.1.3.2\lib\sl4-wp71\MillennialMedia.WP7.SDK.dll</HintPath>
@@ -173,6 +174,10 @@
       <Link>AboutPage.xaml.cs</Link>
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\CanadaTrustv1_WP75\MapPage.xaml.cs">
+      <Link>MapPage.xaml.cs</Link>
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\CanadaTrustv1_WP75\Settings.xaml.cs">
       <Link>Settings.xaml.cs</Link>
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -183,9 +188,6 @@
     <Compile Include="Factory\BranchFactory.cs" />
     <Compile Include="MapDetailsPage.xaml.cs">
       <DependentUpon>MapDetailsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MapPage.xaml.cs">
-      <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\MatchHelper.cs" />
@@ -225,6 +227,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ads\AdSettings.xml" />
+    <Content Include="README_FIRST.txt" />
+    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="WP-Unified-Ad-HowTo.txt" />
     <None Include="Ads\UnifiedAd.xsd" />
     <None Include="Service References\GeocodeService\configuration91.svcinfo" />
@@ -233,11 +241,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="CanadaTrustv1_2013_07_26_17_31_20.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml">

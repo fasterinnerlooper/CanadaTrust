@@ -38,12 +38,6 @@ namespace CanadaTrustv1
             Address.Text = Branch.Address;
             Distance.Text = Branch.Distance;
             Hours.Text = Branch.Hours;
-            Loaded += new System.Windows.RoutedEventHandler(MainPage_Loaded);
-        }
-
-        void MainPage_Loaded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //AdRotator.Invalidate();
         }
 
         private void Address_Tap(object sender, System.Windows.Input.GestureEventArgs e)
