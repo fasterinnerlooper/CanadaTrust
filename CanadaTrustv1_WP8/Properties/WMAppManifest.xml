@@ -4,7 +4,7 @@
   <Languages xmlns="">
     <Language code="en-CA" />
   </Languages>
-  <App xmlns="" ProductID="{6a5d4f53-94e5-4479-885e-636c32e77c3b}" Title="TD Branch Locator" RuntimeType="Silverlight" Version="1.2.1.1" Genre="apps.normal" Author="Shafiq Jetha" Description="A Branch and ATM Locator app" Publisher="Shafiq Jetha" BitsPerPixel="32" PublisherID="{9debb2f9-d11f-4318-89b4-7b9b22a6877f}">
+  <App xmlns="" ProductID="{6a5d4f53-94e5-4479-885e-636c32e77c3b}" Title="Canada Branch Locator" RuntimeType="Silverlight" Version="1.2.1.1" Genre="apps.normal" Author="Shafiq Jetha" Description="A Branch and ATM Locator app" Publisher="Shafiq Jetha" BitsPerPixel="32" PublisherID="{9debb2f9-d11f-4318-89b4-7b9b22a6877f}">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_IDENTITY_USER" />
@@ -25,7 +25,7 @@
           <SmallImageURI IsResource="false" IsRelative="true">Background.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsResource="false" IsRelative="true">Background.png</BackgroundImageURI>
-          <Title>TD Branch Locator</Title>
+          <Title>Canada Branch Locator</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

@@ -362,13 +362,6 @@ namespace CanadaTrustv1
             mapLoadingTextBlock.Text = "Updating";
         }
 
-        private void ApplicationBarIconButton_MainClick(object sender, EventArgs e)
-        {
-            WebBrowserTask webBrowserTask = new WebBrowserTask();
-            webBrowserTask.Uri = new Uri("http://www.td.com/w");
-            webBrowserTask.Show();
-        }
-
         private void ApplicationBarMenuItem_AboutClick(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));

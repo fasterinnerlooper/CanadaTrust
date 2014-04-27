@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TD Branch Locator")]
-[assembly: AssemblyDescription("Locator for TD Branches")]
+[assembly: AssemblyTitle("Canada Branch Locator")]
+[assembly: AssemblyDescription("Locator for Canadian branches")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Shafiq Jetha")]
-[assembly: AssemblyProduct("TD Branch Locator")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyProduct("Canada Branch Locator")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{be9debe5-18be-4171-ada1-0e34c3eb7363}" Title="TD Branch Locator" RuntimeType="Silverlight" Version="1.2.1.1" Genre="apps.normal" Author="Shafiq Jetha" Description="A Branch and ATM Locator app" Publisher="Shafiq Jetha" BitsPerPixel="32">
+  <App xmlns="" ProductID="{be9debe5-18be-4171-ada1-0e34c3eb7363}" Title="Canada Branch Locator" RuntimeType="Silverlight" Version="1.2.1.1" Genre="apps.normal" Author="Shafiq Jetha" Description="A Branch and ATM Locator app" Publisher="Shafiq Jetha" BitsPerPixel="32">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_IDENTITY_USER" />
@@ -18,7 +18,7 @@
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>TD Branch Locator</Title>
+          <Title>Canada Branch Locator</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>

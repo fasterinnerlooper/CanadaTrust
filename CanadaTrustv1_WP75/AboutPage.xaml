@@ -40,23 +40,30 @@
                         Margin="0,20,0,0"
                         >Changes</TextBlock>
                         <TextBlock>
-                            <Run Text="Version 1.3.0.0:"/>
+                            <Run Text="Version 1.3.1.0:"/>
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run Text="• Removed all reference to TD due to trademark infringement"/>
+                            <LineBreak/>
                         </TextBlock>
                         <TextBlock>
+                            <Run Text="Version 1.3.0.0:"/>
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• Fixed a bug that caused the app to crash"/>
                             <LineBreak/>
                         </TextBlock>
                         <TextBlock>
                             <Run Text="Version 1.2.1.1:"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• Added UserVoice link"/>
                             <LineBreak/>
                         </TextBlock>
                         <TextBlock>
                             <Run Text="Version 1.2.1.0:"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• Fixed bugs"/>
                             <LineBreak/>
                             <Run Text="• Added PayPal link" />
@@ -65,14 +72,14 @@
                         <TextBlock>
                             <Run Text="Version 1.2.0.0:"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• Added Windows Phone 8 version" />
                             <LineBreak/>
                         </TextBlock>
                         <TextBlock>
                             <Run Text="Version 1.1.0.1:"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• Added Rate &amp; Review link" />
                             <LineBreak/>
                             <Run Text="  Please consider rating this app" />
@@ -81,14 +88,14 @@
                         <TextBlock>
                             <Run Text="Version 1.1.0.0:"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• Made required changes to the lookup mechanism"/>
                             <LineBreak/>
                         </TextBlock>
                         <TextBlock>
                             <Run Text="Version 1.0.0.6:"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• Fixed Ads not working"/>
                             <LineBreak/>
                             <Run Text="• Minor bug fixes"/>
@@ -97,14 +104,14 @@
                         <TextBlock>
                             <Run Text="Version 1.0.0.5:"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• App officially launched" />
                             <LineBreak/>
                         </TextBlock>
                         <TextBlock>
                             <Run Text="Version 1.0.0.4:"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock TextWrapping="Wrap">
                             <Run Text="• Minor bug fixes"/>
                             <LineBreak/>
                         </TextBlock>
@@ -142,10 +149,10 @@
                             <Run Text="The Canada Trust app launches with the following features:"/>
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap">
-                            <Run Text="• Logging into the TD mobile website"/>
-                            <Run Text="• Finding the 5 closest TD Canada Trust locations using GPS"/>
-                            <Run Text="• Getting directions to a TD Canada Trust location"/>
-                            <Run Text="• Calling a TD Canada Trust Branch"/>
+                            <Run Text="• Logging into the mobile website"/>
+                            <Run Text="• Finding the 5 closest branch locations using GPS"/>
+                            <Run Text="• Getting directions to a branch location"/>
+                            <Run Text="• Calling a branch"/>
                             <Run Text="• Getting branch information, such as Branch number, Phone Number, address and hours"/>
                         </TextBlock>
                     </StackPanel>
