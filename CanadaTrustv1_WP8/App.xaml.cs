@@ -22,6 +22,7 @@ namespace CanadaTrustv1
     {
         public static int currentBranch;
         public static IList<Branch> Branches = new List<Branch>();
+        public static string mapsAPIKey = "AuVxcO7q6MuOaSUWkkOpV19yBG0CSv-SaCN7xxfKvgURFNbW36Jyz9rDlgmf72dP";
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -34,7 +35,7 @@ namespace CanadaTrustv1
         public App()
         {
             // Initialize BugSense
-            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), "243a5892");
+            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), RootFrame, "243a5892");
             // Other Windows Store specific operations
 
             // Standard Silverlight initialization

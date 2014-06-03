@@ -31,7 +31,6 @@ namespace CanadaTrustv1
         GeoCoordinateWatcher coordinateWatcher;
         public ObservableCollection<Branch> Branches;
         TDLocatorRequest locatorRequest = new TDLocatorRequest();
-        string key = "AuVxcO7q6MuOaSUWkkOpV19yBG0CSv-SaCN7xxfKvgURFNbW36Jyz9rDlgmf72dP ";
         Uri locationLookupURI = new Uri("http://td.via.infonow.net/locator/NewSearch.do");
         string currentAddress;
         GeoCoordinate lastLocation = new GeoCoordinate();
@@ -61,8 +60,6 @@ namespace CanadaTrustv1
             };
         }
 
-        public string Key { get { return key; } }
-
         private void setLocation(double latitude, double longitude, double zoomLevel, bool showLocation)
         {
             System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate();
@@ -70,7 +67,7 @@ namespace CanadaTrustv1
             location.Longitude = longitude;
             ReverseGeocodeRequest reverseGeocodeRequest = new ReverseGeocodeRequest();
             reverseGeocodeRequest.Credentials = new Credentials();
-            reverseGeocodeRequest.Credentials.ApplicationId = key;
+            reverseGeocodeRequest.Credentials.ApplicationId = App.mapsAPIKey;
             reverseGeocodeRequest.Location = location;
             GeocodeServiceClient geocodeService = null;
             if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == false)
@@ -192,7 +189,7 @@ namespace CanadaTrustv1
                 }
                 GeocodeServiceClient geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
                 GeocodeRequest request = new GeocodeRequest();
-                request.Credentials = new Credentials() { ApplicationId = key };
+                request.Credentials = new Credentials() { ApplicationId = App.mapsAPIKey };
                 request.Query = address + " " + address2;
                 geocodeService.GeocodeAsync(request);
                 geocodeService.GeocodeCompleted += (s, e) =>
