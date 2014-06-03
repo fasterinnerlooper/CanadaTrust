@@ -29,7 +29,6 @@ namespace CanadaTrustv1
     public partial class MapPage : PhoneApplicationPage
     {
         GeoCoordinateWatcher coordinateWatcher;
-        public ObservableCollection<Branch> Branches;
         TDLocatorRequest locatorRequest = new TDLocatorRequest();
         Uri locationLookupURI = new Uri("http://td.via.infonow.net/locator/NewSearch.do");
         string currentAddress;
@@ -140,8 +139,6 @@ namespace CanadaTrustv1
 
                 setupRegex();
 
-                Branches = new ObservableCollection<Branch>();
-
                 MatchCollection matches = URLStringRegex.Matches(mapURLstring);
                 createBranchesCollection(doc, matches);
             }
@@ -174,7 +171,6 @@ namespace CanadaTrustv1
 
         private void createBranchesCollection(HtmlDocument doc, MatchCollection matches)
         {
-            Collection<Branch> intBranches = new Collection<Branch>();
             for (int i = 2; i <= 6; i++)
             {
                 string address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//strong", doc, AddressRegex);
@@ -194,8 +190,6 @@ namespace CanadaTrustv1
                 geocodeService.GeocodeCompleted += (s, e) =>
                 {
                     GeocodeCompletedEventArgs result = e as GeocodeCompletedEventArgs;
-                    //try
-                    //{
                     int j = iDLookup[address];
                         if (result.Result.Results.Count > 0)
                         {
@@ -226,20 +220,11 @@ namespace CanadaTrustv1
                                 pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
                                 bingMap.Children.Add(pushpin); 
                                 mapLoading.Visibility = System.Windows.Visibility.Collapsed;
-                                //setupMapViewport(branch);
-                                //intBranches.Add(branch);
                             }));
                             App.Branches.Add(branch);
                             setupMapViewport(branch);
-                            intBranches.Add(branch); 
                         }
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    MessageBox.Show(ex.Message);
-                    //}
                 };
-                Branches = new ObservableCollection<Branch>(intBranches);
             }
         }
 
@@ -247,7 +232,11 @@ namespace CanadaTrustv1
         {
             if (viewportSize == null)
             {
-                viewportSize = new LocationRect(branch.Location.Latitude,branch.Location.Longitude,branch.Location.Latitude,branch.Location.Longitude);
+                viewportSize = new LocationRect(
+                    branch.Location.Latitude,
+                    branch.Location.Longitude,
+                    branch.Location.Latitude,
+                    branch.Location.Longitude);
                 return;
             }
             double north = viewportSize.North;

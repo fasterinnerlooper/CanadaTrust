@@ -13,14 +13,14 @@ using CanadaTrustv1.Models;
 
 namespace CanadaTrustv1.Factory
 {
-    public class BranchFactory
+    public class TDBranchFactory
     {
-        private static string locationURI = "http://td.via.infonow.net/locator/DrillAction.do?id={d}";
+        private static Uri locationURI = new Uri("http://td.via.infonow.net/locator/NewSearch.do");
 
         public static Branch createBranch(int branchNumber)
         {
             HtmlWeb web = new HtmlWeb();
-            web.LoadAsync(string.Format(locationURI, branchNumber));
+            web.LoadAsync(string.Format(locationURI.ToString(), branchNumber));
             web.LoadCompleted += (s, e) =>
             {
                 if (e.Error == null)

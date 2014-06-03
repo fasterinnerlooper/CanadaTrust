@@ -192,21 +192,27 @@
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\CanadaTrustv1_WP75\MapDetailsPage.xaml.cs">
+      <Link>MapDetailsPage.xaml.cs</Link>
+      <DependentUpon>MapDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\CanadaTrustv1_WP75\MapPage.xaml.cs">
       <Link>MapPage.xaml.cs</Link>
       <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\CanadaTrustv1_WP75\Models\Branch.cs">
+      <Link>Models\Branch.cs</Link>
+    </Compile>
+    <Compile Include="..\CanadaTrustv1_WP75\Models\MatchHelper.cs">
+      <Link>Models\MatchHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\CanadaTrustv1_WP75\Models\TDLocatorRequest.cs">
+      <Link>Models\TDLocatorRequest.cs</Link>
     </Compile>
     <Compile Include="..\CanadaTrustv1_WP75\Settings.xaml.cs">
       <Link>Settings.xaml.cs</Link>
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Factory\BranchFactory.cs" />
-    <Compile Include="MapDetailsPage.xaml.cs">
-      <DependentUpon>MapDetailsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Branch.cs" />
-    <Compile Include="Models\MatchHelper.cs" />
-    <Compile Include="Models\TDLocatorRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\BingMapsGeocodeService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -241,13 +247,29 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\CanadaTrustv1_WP75\Images\appbar_button1.png">
+      <Link>Images\appbar_button1.png</Link>
+    </Content>
+    <Content Include="..\CanadaTrustv1_WP75\Images\appbar_button2.png">
+      <Link>Images\appbar_button2.png</Link>
+    </Content>
+    <Content Include="..\CanadaTrustv1_WP75\Toolkit.Content\ApplicationBar.Add.png">
+      <Link>Tookit.Content\ApplicationBar.Add.png</Link>
+    </Content>
+    <Content Include="..\CanadaTrustv1_WP75\Toolkit.Content\ApplicationBar.Cancel.png">
+      <Link>Tookit.Content\ApplicationBar.Cancel.png</Link>
+    </Content>
+    <Content Include="..\CanadaTrustv1_WP75\Toolkit.Content\ApplicationBar.Check.png">
+      <Link>Tookit.Content\ApplicationBar.Check.png</Link>
+    </Content>
+    <Content Include="..\CanadaTrustv1_WP75\Toolkit.Content\ApplicationBar.Delete.png">
+      <Link>Tookit.Content\ApplicationBar.Delete.png</Link>
+    </Content>
+    <Content Include="..\CanadaTrustv1_WP75\Toolkit.Content\ApplicationBar.Select.png">
+      <Link>Tookit.Content\ApplicationBar.Select.png</Link>
+    </Content>
     <Content Include="Ads\AdSettings.xml" />
     <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
-    <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     <None Include="WP-Unified-Ad-HowTo.txt" />
     <None Include="Ads\UnifiedAd.xsd" />
     <None Include="Service References\GeocodeService\configuration91.svcinfo" />
@@ -256,7 +278,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="CanadaTrustv1_2013_07_26_17_31_20.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml">
       <SubType>Designer</SubType>
@@ -280,7 +301,6 @@
     <None Include="Service References\BingMapsGeocodeService\geocode2.wsdl" />
     <None Include="Service References\BingMapsGeocodeService\geocode2.xsd" />
     <None Include="Service References\BingMapsGeocodeService\service.xsd" />
-    <Content Include="Images\appbar_button1.png" />
     <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Service References\BingMapsGeocodeService\service2.xsd" />
     <None Include="Service References\GeocodeService\GeocodeService.wsdl" />
@@ -296,7 +316,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="ApplicationIcon.png" />
-    <Content Include="Images\appbar_button2.png" />
     <None Include="Service References\BingMapsGeocodeService\configuration91.svcinfo" />
     <None Include="Service References\BingMapsGeocodeService\configuration.svcinfo">
       <SubType>Designer</SubType>
@@ -314,7 +333,9 @@
     <WCFMetadataStorage Include="Service References\BingMapsGeocodeService\" />
     <WCFMetadataStorage Include="Service References\GeocodeService\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Factory\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
