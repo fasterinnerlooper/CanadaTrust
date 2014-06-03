@@ -66,8 +66,7 @@ namespace CanadaTrustv1
             location.Latitude = latitude;
             location.Longitude = longitude;
             ReverseGeocodeRequest reverseGeocodeRequest = new ReverseGeocodeRequest();
-            reverseGeocodeRequest.Credentials = new Credentials();
-            reverseGeocodeRequest.Credentials.ApplicationId = App.mapsAPIKey;
+            reverseGeocodeRequest.Credentials = App.requestCredentials;
             reverseGeocodeRequest.Location = location;
             GeocodeServiceClient geocodeService = null;
             if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == false)
@@ -189,7 +188,7 @@ namespace CanadaTrustv1
                 }
                 GeocodeServiceClient geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
                 GeocodeRequest request = new GeocodeRequest();
-                request.Credentials = new Credentials() { ApplicationId = App.mapsAPIKey };
+                request.Credentials = App.requestCredentials;
                 request.Query = address + " " + address2;
                 geocodeService.GeocodeAsync(request);
                 geocodeService.GeocodeCompleted += (s, e) =>

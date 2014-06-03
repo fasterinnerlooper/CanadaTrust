@@ -15,6 +15,7 @@ using Microsoft.Phone.Shell;
 using CanadaTrustv1.Models;
 using BugSense;
 using BugSense.Core.Model;
+using Microsoft.Phone.Controls.Maps;
 
 namespace CanadaTrustv1
 {
@@ -22,6 +23,7 @@ namespace CanadaTrustv1
     {
         public static int currentBranch;
         public static IList<Branch> Branches = new List<Branch>();
+        public static Credentials requestCredentials = new Credentials() { ApplicationId = mapsAPIKey };
         public static string mapsAPIKey = "AuVxcO7q6MuOaSUWkkOpV19yBG0CSv-SaCN7xxfKvgURFNbW36Jyz9rDlgmf72dP";
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
