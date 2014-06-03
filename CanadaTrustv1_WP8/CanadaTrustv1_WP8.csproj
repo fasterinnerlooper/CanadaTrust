@@ -188,6 +188,10 @@
       <Link>AboutPage.xaml.cs</Link>
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\CanadaTrustv1_WP75\App.xaml.cs">
+      <Link>App.xaml.cs</Link>
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\CanadaTrustv1_WP75\MapPage.xaml.cs">
       <Link>MapPage.xaml.cs</Link>
       <DependentUpon>MapPage.xaml</DependentUpon>
@@ -195,9 +199,6 @@
     <Compile Include="..\CanadaTrustv1_WP75\Settings.xaml.cs">
       <Link>Settings.xaml.cs</Link>
       <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Factory\BranchFactory.cs" />
     <Compile Include="MapDetailsPage.xaml.cs">
@@ -242,7 +243,6 @@
   <ItemGroup>
     <Content Include="Ads\AdSettings.xml" />
     <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
-    <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
