@@ -461,7 +461,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         
         private System.Nullable<int> CountField;
         
-        private System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.FilterBase> FiltersField;
+        private CanadaTrustv1.BingMapsGeocodeService.FilterBase[] FiltersField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Nullable<int> Count {
@@ -477,7 +477,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.FilterBase> Filters {
+        public CanadaTrustv1.BingMapsGeocodeService.FilterBase[] Filters {
             get {
                 return this.FiltersField;
             }
@@ -671,10 +671,10 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     [System.Runtime.Serialization.DataContractAttribute(Name="Polygon", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     public partial class Polygon : Microsoft.Phone.Controls.Maps.Platform.ShapeBase, System.ComponentModel.INotifyPropertyChanged {
         
-        private System.Collections.ObjectModel.ObservableCollection<Microsoft.Phone.Controls.Maps.Platform.Location> VerticesField;
+        private Microsoft.Phone.Controls.Maps.Platform.Location[] VerticesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<Microsoft.Phone.Controls.Maps.Platform.Location> Vertices {
+        public Microsoft.Phone.Controls.Maps.Platform.Location[] Vertices {
             get {
                 return this.VerticesField;
             }
@@ -940,10 +940,10 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeResponse", Namespace="http://dev.virtualearth.net/webservices/v1/geocode")]
     public partial class GeocodeResponse : CanadaTrustv1.BingMapsGeocodeService.ResponseBase {
         
-        private System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.GeocodeResult> ResultsField;
+        private CanadaTrustv1.BingMapsGeocodeService.GeocodeResult[] ResultsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.GeocodeResult> Results {
+        public CanadaTrustv1.BingMapsGeocodeService.GeocodeResult[] Results {
             get {
                 return this.ResultsField;
             }
@@ -973,9 +973,9 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         
         private string EntityTypeField;
         
-        private System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation> LocationsField;
+        private CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation[] LocationsField;
         
-        private System.Collections.ObjectModel.ObservableCollection<string> MatchCodesField;
+        private string[] MatchCodesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public CanadaTrustv1.BingMapsGeocodeService.Address Address {
@@ -1043,7 +1043,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation> Locations {
+        public CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation[] Locations {
             get {
                 return this.LocationsField;
             }
@@ -1056,7 +1056,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.ObjectModel.ObservableCollection<string> MatchCodes {
+        public string[] MatchCodes {
             get {
                 return this.MatchCodesField;
             }
