@@ -15,14 +15,15 @@ using Microsoft.Phone.Shell;
 using CanadaTrustv1.Models;
 using BugSense;
 using BugSense.Core.Model;
-using Microsoft.Phone.Controls.Maps;
+using BankLocator.Models;
+using CanadaTrustv1.BingMapsGeocodeService;
 
 namespace CanadaTrustv1
 {
     public partial class App : Application
     {
         public static int currentBranch;
-        public static IList<Branch> Branches = new List<Branch>();
+        public static IList<BranchImpl> Branches = new List<BranchImpl>();
         public static Credentials requestCredentials = new Credentials() { ApplicationId = mapsAPIKey };
         public static string mapsAPIKey = "AuVxcO7q6MuOaSUWkkOpV19yBG0CSv-SaCN7xxfKvgURFNbW36Jyz9rDlgmf72dP";
         /// <summary>
@@ -80,7 +81,7 @@ namespace CanadaTrustv1
         {
             IDictionary<string, object> state = PhoneApplicationService.Current.State;
             currentBranch = (int)state["currentBranch"];
-            Branches = (IList<Branch>)state["branches"];
+            Branches = (IList<BranchImpl>)state["branches"];
 
         }
 

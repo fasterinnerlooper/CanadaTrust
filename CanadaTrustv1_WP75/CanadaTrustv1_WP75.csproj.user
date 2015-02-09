@@ -2,14 +2,22 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
+    <PublishUrlHistory />
+    <InstallUrlHistory />
+    <SupportUrlHistory />
+    <UpdateUrlHistory />
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <CurrentDeployCmdId>256</CurrentDeployCmdId>
-    <CurrentDeployID>3B750D6D-6343-41bd-8FD5-18F53DF36A6F</CurrentDeployID>
+    <CurrentDeployID>7988B8C3-3ADE-488d-BA3E-D052AC9DC710</CurrentDeployID>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <CurrentDeployCmdId>256</CurrentDeployCmdId>
-    <CurrentDeployID>3B750D6D-6343-41bd-8FD5-18F53DF36A6F</CurrentDeployID>
+    <CurrentDeployID>7988B8C3-3ADE-488d-BA3E-D052AC9DC710</CurrentDeployID>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

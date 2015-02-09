@@ -27,6 +27,7 @@
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <NuGetPackageImportStamp>c57ef163</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,13 +99,13 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdDuplex.WindowsPhone, Version=2.8.0.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="AdDuplex.WindowsPhone, Version=2.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AdDuplexWP8.2.8.0.8\lib\wp8\AdDuplex.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\AdDuplexWP8.2.8.1.0\lib\wp8\AdDuplex.WindowsPhone.dll</HintPath>
     </Reference>
-    <Reference Include="BugSense-WP8, Version=3.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BugSense-WP8, Version=3.6.8.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\BugSense.WP8.3.6.5.0\lib\wp8\BugSense-WP8.dll</HintPath>
+      <HintPath>..\packages\BugSense.WP8.3.6.8.0\lib\wp8\BugSense-WP8.dll</HintPath>
     </Reference>
     <Reference Include="Google.AdMob.Ads.WindowsPhone7, Version=4.0.1.27070, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -163,21 +164,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\wpunifiedad.1.3.2\lib\sl4-wp71\MobFox.Ads.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SOMAWP7, Version=1.9.4621.30583, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\wpunifiedad.1.3.2\lib\sl4-wp71\SOMAWP7.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
+    <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
+    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.22\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
+    <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.XPath">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.Xml.XPath.dll</HintPath>
@@ -200,26 +205,14 @@
       <Link>MapPage.xaml.cs</Link>
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\CanadaTrustv1_WP75\Models\Branch.cs">
-      <Link>Models\Branch.cs</Link>
-    </Compile>
-    <Compile Include="..\CanadaTrustv1_WP75\Models\MatchHelper.cs">
-      <Link>Models\MatchHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\CanadaTrustv1_WP75\Models\TDLocatorRequest.cs">
-      <Link>Models\TDLocatorRequest.cs</Link>
-    </Compile>
     <Compile Include="..\CanadaTrustv1_WP75\Settings.xaml.cs">
       <Link>Settings.xaml.cs</Link>
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\BranchImpl.cs" />
+    <Compile Include="Models\MatchHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\BingMapsGeocodeService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\GeocodeService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -269,15 +262,62 @@
       <Link>Tookit.Content\ApplicationBar.Select.png</Link>
     </Content>
     <Content Include="Ads\AdSettings.xml" />
-    <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
+    <None Include="Service References\BingMapsGeocodeService\Arrays1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\Arrays11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\CanadaTrustv1.BingMapsGeocodeService.GeocodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\common1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\common11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\contracts1.wsdl" />
+    <None Include="Service References\BingMapsGeocodeService\contracts1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\contracts11.wsdl" />
+    <None Include="Service References\BingMapsGeocodeService\contracts11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\geocode1.wsdl" />
+    <None Include="Service References\BingMapsGeocodeService\geocode1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\geocode11.wsdl" />
+    <None Include="Service References\BingMapsGeocodeService\geocode11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\GeocodeService.wsdl" />
+    <None Include="Service References\BingMapsGeocodeService\GeocodeService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\GeocodeService1.wsdl" />
+    <None Include="Service References\BingMapsGeocodeService\GeocodeService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\GeocodeService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\GeocodeService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\GeocodeService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BingMapsGeocodeService\service11.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="WP-Unified-Ad-HowTo.txt" />
     <None Include="Ads\UnifiedAd.xsd" />
-    <None Include="Service References\GeocodeService\configuration91.svcinfo" />
-    <None Include="Service References\GeocodeService\configuration.svcinfo" />
-    <None Include="Service References\GeocodeService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml">
       <SubType>Designer</SubType>
@@ -285,56 +325,36 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BingMapsGeocodeService\Arrays.xsd" />
-    <None Include="Service References\BingMapsGeocodeService\Arrays2.xsd" />
-    <None Include="Service References\BingMapsGeocodeService\CanadaTrustv1.BingMapsGeocodeService.GeocodeResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
+    <None Include="Service References\BingMapsGeocodeService\configuration91.svcinfo" />
+    <None Include="Service References\BingMapsGeocodeService\configuration.svcinfo" />
+    <None Include="Service References\BingMapsGeocodeService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\BingMapsGeocodeService\common.xsd" />
-    <None Include="Service References\BingMapsGeocodeService\common2.xsd" />
-    <None Include="Service References\BingMapsGeocodeService\contracts.wsdl" />
-    <None Include="Service References\BingMapsGeocodeService\contracts.xsd" />
-    <None Include="Service References\BingMapsGeocodeService\contracts2.wsdl" />
-    <None Include="Service References\BingMapsGeocodeService\contracts2.xsd" />
-    <None Include="Service References\BingMapsGeocodeService\geocode.wsdl" />
-    <None Include="Service References\BingMapsGeocodeService\geocode.xsd" />
-    <None Include="Service References\BingMapsGeocodeService\geocode2.wsdl" />
-    <None Include="Service References\BingMapsGeocodeService\geocode2.xsd" />
-    <None Include="Service References\BingMapsGeocodeService\service.xsd" />
     <Content Include="ServiceReferences.ClientConfig" />
-    <None Include="Service References\BingMapsGeocodeService\service2.xsd" />
-    <None Include="Service References\GeocodeService\GeocodeService.wsdl" />
-    <None Include="Service References\GeocodeService\GeocodeService.xsd" />
-    <None Include="Service References\GeocodeService\GeocodeService1.wsdl" />
-    <None Include="Service References\GeocodeService\GeocodeService1.xsd" />
-    <None Include="Service References\GeocodeService\GeocodeService2.xsd" />
-    <None Include="Service References\GeocodeService\GeocodeService3.xsd" />
-    <None Include="Service References\GeocodeService\GeocodeService4.xsd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="ApplicationIcon.png" />
-    <None Include="Service References\BingMapsGeocodeService\configuration91.svcinfo" />
-    <None Include="Service References\BingMapsGeocodeService\configuration.svcinfo">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BingMapsGeocodeService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\BingMapsGeocodeService\" />
-    <WCFMetadataStorage Include="Service References\GeocodeService\" />
+    <Folder Include="Factory\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Factory\" />
+    <ProjectReference Include="..\BankLocator_Common\BankLocator_Common.csproj">
+      <Project>{26ddf679-4561-47f1-9cdb-8d3b69aa44ca}</Project>
+      <Name>BankLocator_Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BingMapsGeocodeService\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
@@ -346,9 +366,11 @@
   </Target>
   -->
   <ProjectExtensions />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
 </Project>

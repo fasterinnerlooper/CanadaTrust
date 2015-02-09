@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="rmzIdU1JKKfTwkVVOlJAAutDgMI=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="JvUQWPO+JZs2gSQSWTpqrKhmI/8=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IGeocodeService2">
+    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IGeocodeService">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_IGeocodeService2</serializedValue>
+          <serializedValue>BasicHttpBinding_IGeocodeService</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -110,10 +110,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="customBinding" name="CustomBinding_IGeocodeService2">
+    <bindingConfiguration bindingType="customBinding" name="CustomBinding_IGeocodeService">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>CustomBinding_IGeocodeService2</serializedValue>
+          <serializedValue>CustomBinding_IGeocodeService</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -263,7 +263,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IGeocodeService2" contract="BingMapsGeocodeService.IGeocodeService" bindingType="basicHttpBinding" address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc" bindingConfiguration="BasicHttpBinding_IGeocodeService2">
+    <endpoint name="BasicHttpBinding_IGeocodeService" contract="BingMapsGeocodeService.IGeocodeService" bindingType="basicHttpBinding" address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc" bindingConfiguration="BasicHttpBinding_IGeocodeService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc</serializedValue>
@@ -275,7 +275,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_IGeocodeService2</serializedValue>
+          <serializedValue>BasicHttpBinding_IGeocodeService</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BingMapsGeocodeService.IGeocodeService</serializedValue>
@@ -338,7 +338,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_IGeocodeService2</serializedValue>
+          <serializedValue>BasicHttpBinding_IGeocodeService</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -348,7 +348,7 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="CustomBinding_IGeocodeService2" contract="BingMapsGeocodeService.IGeocodeService" bindingType="customBinding" address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc/binaryHttp" bindingConfiguration="CustomBinding_IGeocodeService2">
+    <endpoint name="CustomBinding_IGeocodeService" contract="BingMapsGeocodeService.IGeocodeService" bindingType="customBinding" address="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc/binaryHttp" bindingConfiguration="CustomBinding_IGeocodeService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc/binaryHttp</serializedValue>
@@ -360,7 +360,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>CustomBinding_IGeocodeService2</serializedValue>
+          <serializedValue>CustomBinding_IGeocodeService</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BingMapsGeocodeService.IGeocodeService</serializedValue>
@@ -423,7 +423,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>CustomBinding_IGeocodeService2</serializedValue>
+          <serializedValue>CustomBinding_IGeocodeService</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

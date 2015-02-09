@@ -10,18 +10,19 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-using CanadaTrustv1.Models;
 using Microsoft.Phone.Tasks;
+using BankLocator.Models;
+using CanadaTrustv1.Models;
 
 namespace CanadaTrustv1
 {
     public partial class MapDetailsPage : PhoneApplicationPage
     {
-        public Branch Branch;
+        public BranchImpl Branch;
         public MapDetailsPage()
         {
             InitializeComponent();
-            Branch = App.Branches.First(x => x.BranchID == App.currentBranch);
+            Branch = App.Branches.First<BranchImpl>(x => x.BranchID == App.currentBranch);
             if (Branch.BranchID == 0)
             {
                 BranchNumber.Text = "Green Machine ABM Only";

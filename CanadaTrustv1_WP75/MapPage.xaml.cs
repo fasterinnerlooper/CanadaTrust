@@ -12,7 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Controls.Maps;
-using CanadaTrustv1.BingMapsGeocodeService;
+using Microsoft.Phone.Maps.Services;
 using System.Collections.ObjectModel;
 using System.Device.Location;
 using CanadaTrustv1.Models;
@@ -23,25 +23,42 @@ using Microsoft.Phone.Tasks;
 using System.IO.IsolatedStorage;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
+using BankLocator.Models;
+using BankLocator_Common.Helpers;
+using BankLocator_Common.Locators;
+using Windows.Devices.Geolocation;
 
 namespace CanadaTrustv1
 {
+
     public partial class MapPage : PhoneApplicationPage
     {
         GeoCoordinateWatcher coordinateWatcher;
+        ReverseGeocodeQuery reverseGeocodeQuery = new ReverseGeocodeQuery();
         TDLocatorRequest locatorRequest = new TDLocatorRequest();
-        Uri locationLookupURI = new Uri("http://td.via.infonow.net/locator/NewSearch.do");
         string currentAddress;
         GeoCoordinate lastLocation = new GeoCoordinate();
-        Regex URLStringRegex, mapIDNumberRegex, BranchNumberRegex, PhoneNumberRegex, AddressRegex, Address2Regex, HoursRegex, DistanceRegex;
+        Regex URLStringRegex,
+              mapIDNumberRegex,
+              BranchNumberRegex,
+              PhoneNumberRegex,
+              AddressRegex,
+              Address2Regex,
+              HoursRegex,
+              DistanceRegex;
         Pushpin centreLocation;
         LocationRect viewportSize = null;
         HtmlDocument doc;
-        Dictionary<string, int> iDLookup = new Dictionary<string, int>();
 
         public MapPage()
         {
             InitializeComponent();
+            StartPositionWatching();
+        }
+
+        public void StartPositionWatching()
+        {
             coordinateWatcher = new GeoCoordinateWatcher();
             coordinateWatcher.MovementThreshold = 50;
 
@@ -50,65 +67,65 @@ namespace CanadaTrustv1
                 if (lastLocation != coordinateWatcher.Position.Location)
                 {
                     mapLoading.Visibility = System.Windows.Visibility.Visible;
-                    setLocation(coordinateWatcher.Position.Location.Latitude,
-                                coordinateWatcher.Position.Location.Longitude,
-                                10,
-                                true);
-                    lastLocation = coordinateWatcher.Position.Location;
+                    setLocation();
                 }
             };
+            coordinateWatcher.Start();
         }
 
-        private void setLocation(double latitude, double longitude, double zoomLevel, bool showLocation)
+        private async void setLocation()
         {
-            System.Device.Location.GeoCoordinate location = new System.Device.Location.GeoCoordinate();
-            location.Latitude = latitude;
-            location.Longitude = longitude;
-            ReverseGeocodeRequest reverseGeocodeRequest = new ReverseGeocodeRequest();
-            reverseGeocodeRequest.Credentials = App.requestCredentials;
-            reverseGeocodeRequest.Location = location;
-            GeocodeServiceClient geocodeService = null;
-            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == false)
+            Geolocator geolocator = new Geolocator();
+            geolocator.DesiredAccuracy = PositionAccuracy.High;
+            Geoposition geoposition = await geolocator.GetGeopositionAsync(TimeSpan.FromSeconds(10), TimeSpan.FromMinutes(1));
+            if (!reverseGeocodeQuery.IsBusy)
             {
-                MessageBox.Show("There was a problem connecting to the remote location service. Please check your internet connection and try again.", "Location Services problem", MessageBoxButton.OK);
-                return;
-            }
-            try
-            {
-                geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
-                geocodeService.ReverseGeocodeAsync(reverseGeocodeRequest);
-                geocodeService.ReverseGeocodeCompleted += geocodeService_ReverseGeocodeCompleted;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void geocodeService_ReverseGeocodeCompleted(object sender, ReverseGeocodeCompletedEventArgs e)
-        {
-            GeocodeResponse geocodeResponse;
-            try
-            {
-                geocodeResponse = e.Result;
-                foreach (GeocodeResult result in geocodeResponse.Results)
+                reverseGeocodeQuery.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+                if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == false)
                 {
-                    if (result == null || result.Address.AddressLine == "")
+                    MessageBox.Show("There was a problem connecting to the remote location service. Please check your internet connection and try again.", "Location Services problem", MessageBoxButton.OK);
+                    return;
+                }
+                try
+                {
+                    reverseGeocodeQuery.QueryCompleted += geocodeService_ReverseGeocodeCompleted;
+                    reverseGeocodeQuery.QueryAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void geocodeService_ReverseGeocodeCompleted(object sender, QueryCompletedEventArgs<IList<MapLocation>> e)
+        {
+            var query = sender as ReverseGeocodeQuery;
+            try
+            {
+                if (e.Result.Count() > 0)
+                {
+                    foreach (MapLocation result in e.Result)
                     {
-                        continue;
+                        var address = result.Information.Address;
+                        if (string.IsNullOrEmpty(address.HouseNumber) &&
+                            string.IsNullOrEmpty(address.Street) &&
+                            string.IsNullOrEmpty(address.StateCode))
+                        {
+                            setLocation();
+                        }
+                        if (result.Information.Address.Country == "Canada")
+                        {
+                            locatorRequest.FullAddress = String.Format("{0} {1}, {2}, {3}", address.HouseNumber,
+                                address.Street, address.City, address.State);
+                            Uri compiledUri = locatorRequest.compileUri();
+                            viewportSize = null;
+                            setupCentrePushpin(query.GeoCoordinate.Latitude,query.GeoCoordinate.Longitude);
+                            callWebsite(compiledUri);
+                            break;
+                        }
+                        MessageBox.Show("This app is not available in your location/region.\nPlease try again later.", "Outside of Canada", MessageBoxButton.OK);
                     }
-                    if (result.Address.CountryRegion == "Canada")
-                    {
-                        currentAddress = result.Address.FormattedAddress;
-                        locatorRequest.FullAddress = currentAddress;
-                        Uri compiledUri = locatorRequest.compileUri();
-                        iDLookup = new Dictionary<string, int>();
-                        viewportSize = null;
-                        setupCentrePushpin();
-                        callWebsite(compiledUri);
-                        break;
-                    }
-                    MessageBox.Show("This app is not available in your location/region.\nPlease try again later.", "Outside of Canada", MessageBoxButton.OK);
                 }
             }
             catch (Exception)
@@ -117,7 +134,6 @@ namespace CanadaTrustv1
                 return;
             }
         }
-        private void fakeWebRequestCallback(IAsyncResult result) { }
         private void webRequestCallback(IAsyncResult result)
         {
             HttpWebRequest request = (HttpWebRequest)result.AsyncState;
@@ -131,7 +147,10 @@ namespace CanadaTrustv1
                 if (error != null)
                 {
                     //Are we in the US? Check the first.
-                    MessageBox.Show("The service is unavailable, please try again later");
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        MessageBox.Show("The service is unavailable, please try again later");
+                    });
                     return;
                 }
                 HtmlNode mapURL = doc.DocumentNode.SelectSingleNode("//img[@usemap='#pins']");
@@ -140,23 +159,20 @@ namespace CanadaTrustv1
                 setupRegex();
 
                 MatchCollection matches = URLStringRegex.Matches(mapURLstring);
-                createBranchesCollection(doc, matches);
+                Dispatcher.BeginInvoke(() =>
+                {
+                    createBranchesCollection(doc, matches);
+                });
             }
         }
         private void callWebsite(Uri uri)
         {
             bingMap.Children.Clear();
-            HtmlAgilityPack.HtmlWeb web = new HtmlWeb();
-            CookieContainer cookieContainer = new CookieContainer();
-            HttpWebRequest webRequest = (HttpWebRequest)HttpWebRequest.Create("http://td.info.vianow.net/locator");
-            webRequest.CookieContainer = cookieContainer;
-            webRequest.BeginGetResponse(new AsyncCallback(fakeWebRequestCallback), webRequest);
-            HttpWebRequest webRequest2 = (HttpWebRequest)HttpWebRequest.Create(uri.ToString());
-            webRequest2.CookieContainer = cookieContainer;
-            webRequest2.BeginGetResponse(new AsyncCallback(webRequestCallback), webRequest2);
+            TDLocator tdLocator = new TDLocator(uri);
+            tdLocator.BeginWebRequest(webRequestCallback);
         }
 
-        private void addPushpinsToMap(Branch branch)
+        private void addPushpinsToMap(BranchImpl branch)
         {
             Pushpin pushpin = new Pushpin()
             {
@@ -169,66 +185,49 @@ namespace CanadaTrustv1
             bingMap.Children.Add(pushpin);
         }
 
-        private void createBranchesCollection(HtmlDocument doc, MatchCollection matches)
+        private async void createBranchesCollection(HtmlDocument doc, MatchCollection matches)
         {
-            for (int i = 2; i <= 6; i++)
+            for (var i = 2; i <= 6; i++)
             {
-                string address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//strong", doc, AddressRegex);
-                string address2 = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc, Address2Regex);
-                string BranchNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc, BranchNumberRegex);
-                string HoursUnformatted = MatchHelper.MatchAndReturnHtml("//tr[@class='table'][" + i + "]/td[4]//.", doc, HoursRegex);
-                string HoursFormatted = HoursUnformatted.Replace("<br>", "\n");
-                if (!iDLookup.ContainsKey(address))
+                var BranchNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc,
+                    BranchNumberRegex);
+                BranchImpl branch = new BranchImpl()
                 {
-                    iDLookup.Add(address, i);
-                }
-                GeocodeServiceClient geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
-                GeocodeRequest request = new GeocodeRequest();
-                request.Credentials = App.requestCredentials;
-                request.Query = address + " " + address2;
-                geocodeService.GeocodeAsync(request);
-                geocodeService.GeocodeCompleted += (s, e) =>
-                {
-                    GeocodeCompletedEventArgs result = e as GeocodeCompletedEventArgs;
-                    int j = iDLookup[address];
-                        if (result.Result.Results.Count > 0)
-                        {
-                            Branch branch = new Branch()
-                            {
-                                MapID = Int32.Parse(MatchHelper.Match("//tr[@class='table'][" + j + "]/td[1]/strong", doc, mapIDNumberRegex)),
-                                BranchID = BranchNumber == "" ? 0 : Int32.Parse(BranchNumber),
-                                PhoneNumber = MatchHelper.Match("//tr[@class='table'][" + j + "]/td[5]", doc, PhoneNumberRegex),
-                                Address = address,
-                                AddressLine2 = address2,
-                                Hours = HoursFormatted,
-                                Distance = MatchHelper.Match("//tr[@class='table'][" + j + "]/td[3]", doc, DistanceRegex),
-                                Location = new GeoCoordinate()
-                                {
-                                    Latitude = result.Result.Results[0].Locations[0].Latitude,
-                                    Longitude = result.Result.Results[0].Locations[0].Longitude
-                                }
+                    MapID =
+                        Int32.Parse(MatchHelper.Match("//tr[@class='table'][" + i + "]/td[1]/strong", doc,
+                            mapIDNumberRegex)),
+                    BranchID = BranchNumber == "" ? 0 : Int32.Parse(BranchNumber),
+                    PhoneNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[5]", doc, PhoneNumberRegex),
+                    Address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//strong", doc, AddressRegex),
+                    AddressLine2 = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc, Address2Regex),
+                    Hours = MatchHelper.MatchAndReturnHtml("//tr[@class='table'][" + i + "]/td[4]//.", doc,
+                    HoursRegex).Replace("<br>", "\n"),
+                    Distance = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[3]", doc, DistanceRegex),
+                    Location = new GeoCoordinate()
+                    {
+                        Latitude = Double.Parse(matches[i - 2].Groups[1].Value),
+                        Longitude = Double.Parse(matches[i - 2].Groups[2].Value)
+                    }
 
-                            };
-                            bingMap.Dispatcher.BeginInvoke(new Action(delegate()
-                            {
-                                Pushpin pushpin = new Pushpin()
-                                {
-                                    Location = branch.Location,
-                                    Content = branch.Address,
-                                    Tag = branch.BranchID
-                                };
-                                pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
-                                bingMap.Children.Add(pushpin); 
-                                mapLoading.Visibility = System.Windows.Visibility.Collapsed;
-                            }));
-                            App.Branches.Add(branch);
-                            setupMapViewport(branch);
-                        }
                 };
+                bingMap.Dispatcher.BeginInvoke(new Action(delegate()
+                {
+                    var pushpin = new Pushpin()
+                    {
+                        Location = branch.Location,
+                        Content = branch.Address,
+                        Tag = branch.BranchID
+                    };
+                    pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
+                    bingMap.Children.Add(pushpin);
+                    mapLoading.Visibility = System.Windows.Visibility.Collapsed;
+                }));
+                setupMapViewport(branch);
+                App.Branches.Add(branch);
             }
         }
 
-        private void setupMapViewport(Branch branch)
+        private void setupMapViewport(BranchImpl branch)
         {
             if (viewportSize == null)
             {
@@ -254,11 +253,11 @@ namespace CanadaTrustv1
             //TODO: Centre Map using Map's centre and our current position
         }
 
-        private void setupCentrePushpin()
+        private void setupCentrePushpin(double latitude, double longitude)
         {
             System.Device.Location.GeoCoordinate locator = new System.Device.Location.GeoCoordinate();
-            locator.Latitude = coordinateWatcher.Position.Location.Latitude;
-            locator.Longitude = coordinateWatcher.Position.Location.Longitude;
+            locator.Latitude = latitude;
+            locator.Longitude = longitude;
             bingMap.Dispatcher.BeginInvoke(new Action(delegate()
             {
                 centreLocation = new Pushpin();
@@ -271,7 +270,8 @@ namespace CanadaTrustv1
 
         private void setupRegex()
         {
-            string URLStringPattern = @"pp=([0-9\\.]*),([0-9-\\.]*);[0-9]+;(.)";
+            //string URLStringPattern = @"pp=([0-9\\.]*),([0-9-\\.]*);[0-9]+;(.)";
+            string URLStringPattern = @"pp=(\d{2}\.\d*),(-\d{3}\.\d*);\d*;(\d+)";
             URLStringRegex = new Regex(URLStringPattern, RegexOptions.IgnoreCase);
             string mapIDNumberPattern = @"([0-9])\.";
             mapIDNumberRegex = new Regex(mapIDNumberPattern, RegexOptions.IgnoreCase);
@@ -332,13 +332,11 @@ namespace CanadaTrustv1
             IsolatedStorageSettings.ApplicationSettings["TimesRun"] = ++TimesRun;
             mapLoading.Visibility = System.Windows.Visibility.Collapsed;
             base.OnNavigatedTo(e);
-            coordinateWatcher.Start();
         }
 
         protected override void OnNavigatingFrom(System.Windows.Navigation.NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
-            coordinateWatcher.Stop();
         }
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)

@@ -22,7 +22,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.GeocodeRequest))]
     public partial class RequestBase : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private Microsoft.Phone.Controls.Maps.Credentials CredentialsField;
+        private CanadaTrustv1.BingMapsGeocodeService.Credentials CredentialsField;
         
         private string CultureField;
         
@@ -31,7 +31,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         private CanadaTrustv1.BingMapsGeocodeService.UserProfile UserProfileField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Microsoft.Phone.Controls.Maps.Credentials Credentials {
+        public CanadaTrustv1.BingMapsGeocodeService.Credentials Credentials {
             get {
                 return this.CredentialsField;
             }
@@ -94,6 +94,51 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Credentials", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
+    public partial class Credentials : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string ApplicationIdField;
+        
+        private string TokenField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ApplicationId {
+            get {
+                return this.ApplicationIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ApplicationIdField, value) != true)) {
+                    this.ApplicationIdField = value;
+                    this.RaisePropertyChanged("ApplicationId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Token {
+            get {
+                return this.TokenField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TokenField, value) != true)) {
+                    this.TokenField = value;
+                    this.RaisePropertyChanged("Token");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ExecutionOptions", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     public partial class ExecutionOptions : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -125,9 +170,6 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UserProfile", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Microsoft.Phone.Controls.Maps.Platform.Rectangle))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.Circle))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.Polygon))]
     public partial class UserProfile : object, System.ComponentModel.INotifyPropertyChanged {
         
         private CanadaTrustv1.BingMapsGeocodeService.Heading CurrentHeadingField;
@@ -140,7 +182,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         
         private string IPAddressField;
         
-        private Microsoft.Phone.Controls.Maps.Platform.ShapeBase MapViewField;
+        private CanadaTrustv1.BingMapsGeocodeService.ShapeBase MapViewField;
         
         private CanadaTrustv1.BingMapsGeocodeService.SizeOfint ScreenSizeField;
         
@@ -210,7 +252,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Microsoft.Phone.Controls.Maps.Platform.ShapeBase MapView {
+        public CanadaTrustv1.BingMapsGeocodeService.ShapeBase MapView {
             get {
                 return this.MapViewField;
             }
@@ -248,14 +290,12 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ReverseGeocodeRequest", Namespace="http://dev.virtualearth.net/webservices/v1/geocode")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.UserLocation))]
     public partial class ReverseGeocodeRequest : CanadaTrustv1.BingMapsGeocodeService.RequestBase {
         
-        private Microsoft.Phone.Controls.Maps.Platform.Location LocationField;
+        private CanadaTrustv1.BingMapsGeocodeService.Location LocationField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Microsoft.Phone.Controls.Maps.Platform.Location Location {
+        public CanadaTrustv1.BingMapsGeocodeService.Location Location {
             get {
                 return this.LocationField;
             }
@@ -461,7 +501,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         
         private System.Nullable<int> CountField;
         
-        private CanadaTrustv1.BingMapsGeocodeService.FilterBase[] FiltersField;
+        private System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.FilterBase> FiltersField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Nullable<int> Count {
@@ -477,7 +517,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CanadaTrustv1.BingMapsGeocodeService.FilterBase[] Filters {
+        public System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.FilterBase> Filters {
             get {
                 return this.FiltersField;
             }
@@ -532,7 +572,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UserLocation", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    public partial class UserLocation : Microsoft.Phone.Controls.Maps.Platform.Location, System.ComponentModel.INotifyPropertyChanged {
+    public partial class UserLocation : CanadaTrustv1.BingMapsGeocodeService.Location {
         
         private CanadaTrustv1.BingMapsGeocodeService.Confidence ConfidenceField;
         
@@ -548,6 +588,15 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
                 }
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ShapeBase", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.Rectangle))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.Circle))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.Polygon))]
+    public partial class ShapeBase : object, System.ComponentModel.INotifyPropertyChanged {
         
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
@@ -604,21 +653,174 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeviceType", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
+    public enum DeviceType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Desktop = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Mobile = 1,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DistanceUnit", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
+    public enum DistanceUnit : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Kilometer = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Mile = 1,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Location", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.UserLocation))]
+    public partial class Location : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private double AltitudeField;
+        
+        private double LatitudeField;
+        
+        private double LongitudeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Altitude {
+            get {
+                return this.AltitudeField;
+            }
+            set {
+                if ((this.AltitudeField.Equals(value) != true)) {
+                    this.AltitudeField = value;
+                    this.RaisePropertyChanged("Altitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Latitude {
+            get {
+                return this.LatitudeField;
+            }
+            set {
+                if ((this.LatitudeField.Equals(value) != true)) {
+                    this.LatitudeField = value;
+                    this.RaisePropertyChanged("Latitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Longitude {
+            get {
+                return this.LongitudeField;
+            }
+            set {
+                if ((this.LongitudeField.Equals(value) != true)) {
+                    this.LongitudeField = value;
+                    this.RaisePropertyChanged("Longitude");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeLocation", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
+    public partial class GeocodeLocation : CanadaTrustv1.BingMapsGeocodeService.Location {
+        
+        private string CalculationMethodField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CalculationMethod {
+            get {
+                return this.CalculationMethodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CalculationMethodField, value) != true)) {
+                    this.CalculationMethodField = value;
+                    this.RaisePropertyChanged("CalculationMethod");
+                }
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Confidence", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
+    public enum Confidence : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        High = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Medium = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Low = 2,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Rectangle", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
+    public partial class Rectangle : CanadaTrustv1.BingMapsGeocodeService.ShapeBase {
+        
+        private CanadaTrustv1.BingMapsGeocodeService.Location NortheastField;
+        
+        private CanadaTrustv1.BingMapsGeocodeService.Location SouthwestField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CanadaTrustv1.BingMapsGeocodeService.Location Northeast {
+            get {
+                return this.NortheastField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NortheastField, value) != true)) {
+                    this.NortheastField = value;
+                    this.RaisePropertyChanged("Northeast");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CanadaTrustv1.BingMapsGeocodeService.Location Southwest {
+            get {
+                return this.SouthwestField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SouthwestField, value) != true)) {
+                    this.SouthwestField = value;
+                    this.RaisePropertyChanged("Southwest");
+                }
+            }
+        }
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Circle", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.UserLocation))]
-    public partial class Circle : Microsoft.Phone.Controls.Maps.Platform.ShapeBase, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Circle : CanadaTrustv1.BingMapsGeocodeService.ShapeBase {
         
-        private Microsoft.Phone.Controls.Maps.Platform.Location CenterField;
+        private CanadaTrustv1.BingMapsGeocodeService.Location CenterField;
         
         private CanadaTrustv1.BingMapsGeocodeService.DistanceUnit DistanceUnitField;
         
         private double RadiusField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Microsoft.Phone.Controls.Maps.Platform.Location Center {
+        public CanadaTrustv1.BingMapsGeocodeService.Location Center {
             get {
                 return this.CenterField;
             }
@@ -655,26 +857,17 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
                 }
             }
         }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Polygon", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    public partial class Polygon : Microsoft.Phone.Controls.Maps.Platform.ShapeBase, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Polygon : CanadaTrustv1.BingMapsGeocodeService.ShapeBase {
         
-        private Microsoft.Phone.Controls.Maps.Platform.Location[] VerticesField;
+        private System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.Location> VerticesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Microsoft.Phone.Controls.Maps.Platform.Location[] Vertices {
+        public System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.Location> Vertices {
             get {
                 return this.VerticesField;
             }
@@ -683,81 +876,6 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
                     this.VerticesField = value;
                     this.RaisePropertyChanged("Vertices");
                 }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DeviceType", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    public enum DeviceType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Desktop = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Mobile = 1,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DistanceUnit", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    public enum DistanceUnit : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Kilometer = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Mile = 1,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Confidence", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    public enum Confidence : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        High = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Medium = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Low = 2,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeLocation", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    public partial class GeocodeLocation : Microsoft.Phone.Controls.Maps.Platform.Location, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string CalculationMethodField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CalculationMethod {
-            get {
-                return this.CalculationMethodField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CalculationMethodField, value) != true)) {
-                    this.CalculationMethodField = value;
-                    this.RaisePropertyChanged("CalculationMethod");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
@@ -940,10 +1058,10 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeResponse", Namespace="http://dev.virtualearth.net/webservices/v1/geocode")]
     public partial class GeocodeResponse : CanadaTrustv1.BingMapsGeocodeService.ResponseBase {
         
-        private CanadaTrustv1.BingMapsGeocodeService.GeocodeResult[] ResultsField;
+        private System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.GeocodeResult> ResultsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CanadaTrustv1.BingMapsGeocodeService.GeocodeResult[] Results {
+        public System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.GeocodeResult> Results {
             get {
                 return this.ResultsField;
             }
@@ -959,13 +1077,11 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeResult", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CanadaTrustv1.BingMapsGeocodeService.UserLocation))]
     public partial class GeocodeResult : object, System.ComponentModel.INotifyPropertyChanged {
         
         private CanadaTrustv1.BingMapsGeocodeService.Address AddressField;
         
-        private Microsoft.Phone.Controls.Maps.Platform.Rectangle BestViewField;
+        private CanadaTrustv1.BingMapsGeocodeService.Rectangle BestViewField;
         
         private CanadaTrustv1.BingMapsGeocodeService.Confidence ConfidenceField;
         
@@ -973,9 +1089,9 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         
         private string EntityTypeField;
         
-        private CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation[] LocationsField;
+        private System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation> LocationsField;
         
-        private string[] MatchCodesField;
+        private System.Collections.ObjectModel.ObservableCollection<string> MatchCodesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public CanadaTrustv1.BingMapsGeocodeService.Address Address {
@@ -991,7 +1107,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Microsoft.Phone.Controls.Maps.Platform.Rectangle BestView {
+        public CanadaTrustv1.BingMapsGeocodeService.Rectangle BestView {
             get {
                 return this.BestViewField;
             }
@@ -1043,7 +1159,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation[] Locations {
+        public System.Collections.ObjectModel.ObservableCollection<CanadaTrustv1.BingMapsGeocodeService.GeocodeLocation> Locations {
             get {
                 return this.LocationsField;
             }
@@ -1056,7 +1172,7 @@ namespace CanadaTrustv1.BingMapsGeocodeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] MatchCodes {
+        public System.Collections.ObjectModel.ObservableCollection<string> MatchCodes {
             get {
                 return this.MatchCodesField;
             }
