@@ -12,15 +12,10 @@ using Newtonsoft.Json.Linq;
 
 namespace BankLocator_Common.Locators
 {
-    public class BMOLocator
+    public class BMOLocator : ILocator
     {
         private string requestString = "http://locator.bmo.com/LocatorService.asmx/SearchLocations";
         private string requestBody = @"{{""searchSpec"":{{""Type"":""BMOBranch"",""Location"":{{""Latitude"":{0},""Longitude"":{1},""Altitude"":null,""AltitudeMode"":null,""_reserved"":null}},""DisplayLanguage"":""English"",""Subdivision"":null}}}}";
-
-        public BMOLocator()
-        {
-
-        }
 
         public RootObject translateJson(string json)
         {
