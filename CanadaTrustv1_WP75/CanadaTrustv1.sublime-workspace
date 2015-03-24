@@ -1,0 +1,295 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 104.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Bookmarks: Select All"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"show",
+				"SublimeLint: Show All Errors"
+			],
+			[
+				"show all",
+				"SublimeLint: Show All Errors"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 120.0,
+		"history":
+		[
+			"import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP75",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP8"
+	],
+	"file_history":
+	[
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/Backup/MapPage.xaml.cs",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP75/MapPage.xaml.cs",
+		"/C/Users/Shafiq/AppData/Roaming/Sublime Text 3/Packages/User/C#.sublime-settings",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/Backup/MapPage.xaml",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP8/Bin/Release/Microsoft.Advertising.Mobile.xml",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP75/CanadaTrustv1.sublime-project",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1.sln",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/.gitignore",
+		"/C/Users/Shafiq/Documents/IISBookings/Web.config",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/0NK4CJ17/deals.php",
+		"/C/Users/Shafiq/Documents/Visual Studio 2013/Projects/IISAlumni/.nuget/packages.config",
+		"/C/Users/Shafiq/Documents/Visual Studio 2013/Projects/HRDatabase/.gitignore",
+		"/C/Users/Shafiq/Documents/Visual Studio 2013/Projects/HRDatabase/HRDatabase/temp/README",
+		"/C/Users/Shafiq/Documents/GitHub/TravelApp/BanjiTravelApp/Context/TravelAppContext.cs",
+		"/C/Users/Shafiq/Documents/GitHub/TravelApp/BanjiTravelApp/Web.config",
+		"/C/Users/Shafiq/Documents/Visual Studio 2013/Projects/IISAlumni/IISAlumni/Web.config",
+		"/C/Users/Shafiq/Documents/GitHub/TravelApp/BanjiTravelApp/Properties/AssemblyInfo.cs",
+		"//CANADASERVER/Videos/Movie/Hugo (2011).has_invalid_date.twonky",
+		"/C/Users/Shafiq/Documents/dumps/Dump20141015-2.sql",
+		"//CANADASERVER/Users/shafiq/Recovery Disk 3/dircontent",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/TH4R2MSG/package_show.json",
+		"/C/Users/Shafiq/Documents/CSV Parser for WinRT/license.rtf",
+		"/C/Users/Shafiq/Documents/CISWebsite/CISWebsite/Web.config",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/87SWWPXT/search (1).json",
+		"/C/Users/Shafiq/Documents/GitHub/BandCamp/MainPage.xaml",
+		"/C/Users/Shafiq/Documents/GitHub/BandCamp/App.xaml",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/TH4R2MSG/search.json",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/TH4R2MSG/info.json",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/87SWWPXT/search.json",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/0NK4CJ17/search (1).json",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/0NK4CJ17/search.json",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP75/AboutPage.xaml",
+		"/C/Program Files (x86)/Steam/SteamApps/common/Luftrausers/data/res/enemies.json"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"(.*)",
+			"	",
+			"[(YES|NO) $",
+			"tt_Survey2014",
+			">\\n\\n(\\s*)<",
+			">\\n] *\\n<",
+			">\\n\\n<",
+			"appointedinstitution5",
+			"\\d\\. ",
+			"\\d\\.",
+			"colsa",
+			"col",
+			"\\d\\d\\. ",
+			"contacts",
+			"$",
+			"^",
+			"$",
+			"`$",
+			"$",
+			"^",
+			"$",
+			"\"",
+			"create_.*",
+			"create_input.*",
+			"create_input",
+			"&quot;",
+			"&lt;",
+			"&gt;",
+			"varchar",
+			"`",
+			"vm"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"'\\1' => '\\1'",
+			"\\1\\1",
+			"\\1",
+			",",
+			"survey2014",
+			">\\n\\1<",
+			"",
+			"'",
+			"\"",
+			"<",
+			">",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 30.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.variable_get":
+	{
+		"height": 94.0
+	},
+	"project": "CanadaTrustv1.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"map",
+				"CanadaTrustv1_WP75\\MapPage.xaml.cs"
+			],
+			[
+				"mappage.xaml.cs",
+				"CanadaTrustv1_WP75\\MapPage.xaml.cs"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"_vintageous_last_buffer_search": "createbra",
+		"_vintageous_last_buffer_search_command": "vi_slash",
+		"_vintageous_reset_during_init": true,
+		"vintage":
+		{
+			"_cmdline_cd": "C:\\Users\\Shafiq\\Documents\\GitHub\\CanadaTrust\\Backup"
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 202.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
