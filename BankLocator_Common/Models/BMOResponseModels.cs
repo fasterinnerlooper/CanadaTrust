@@ -65,9 +65,9 @@ namespace BankLocator_Common.Models
             get
             {
                 StringBuilder sb = new StringBuilder();
-                if (string.IsNullOrEmpty(Unit)) sb.Append(Unit + " ");
-                if (string.IsNullOrEmpty(StreetNumber)) sb.Append(StreetNumber + " ");
-                if (string.IsNullOrEmpty(Street)) sb.Append(Street);
+                if (!string.IsNullOrEmpty(Unit)) sb.Append(Unit + " ");
+                if (!string.IsNullOrEmpty(StreetNumber)) sb.Append(StreetNumber + " ");
+                if (!string.IsNullOrEmpty(Street)) sb.Append(Street);
                 return sb.ToString().TrimEnd();
             }
 
@@ -77,8 +77,9 @@ namespace BankLocator_Common.Models
             get
             {
                 StringBuilder sb = new StringBuilder();
-                if (string.IsNullOrEmpty(City)) sb.Append(City + " ");
-                if (string.IsNullOrEmpty(ProvinceState)) sb.Append(ProvinceState);
+                if (!string.IsNullOrEmpty(City)) sb.Append(City + ", ");
+                if (!string.IsNullOrEmpty(ProvinceState)) sb.Append(ProvinceState + ", ");
+                if (!string.IsNullOrEmpty(PostalCode)) sb.Append(PostalCode);
                 return sb.ToString().TrimEnd();
             }
         }

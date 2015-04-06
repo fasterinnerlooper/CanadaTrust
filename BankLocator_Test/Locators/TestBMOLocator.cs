@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using BankLocator_Common.Locators;
 
-namespace BankLocator_Test
+namespace BankLocator_Test.Locators
 {
     [TestClass]
     public class TestBMOLocator
     {
         string json = BMOJsonStringProvider.GetString();
         BMOLocator sut;
+        double latitude = 51.2926407;
+        double longitude=-114.0076065;
 
         [TestInitialize]
         public void SetUp()
@@ -32,36 +34,17 @@ namespace BankLocator_Test
         [TestMethod]
         public async Task ShouldCorrectlyFormatRequestUri()
         {
-            var latitude = 51.2926407;
-            var longitude=-114.0076065;
-            sut.SetLocation(latitude, longitude);
-            sut.InitializeHttpContent();
+            SetAndInitializeRequest();
             var requestString = await sut.HttpContent.ReadAsStringAsync();
             var expectedJson = @"{""searchSpec"":{""Type"":""BMOBranch"",""Location"":{""Latitude"":51.2926407,""Longitude"":-114.0076065,""Altitude"":null,""AltitudeMode"":null,""_reserved"":null},""DisplayLanguage"":""English"",""Subdivision"":null}}";
             Assert.AreEqual(expectedJson, requestString);
         }
 
-        [TestMethod, Ignore] //Ignored because it is technically an integration test
-        public async Task ShouldCorrectlySendRequest()
-        {
-            var latitude = 51.2926407;
-            var longitude = -114.0076065;
-            sut.SetLocation(latitude, longitude);
-            sut.InitializeHttpContent();
-            await sut.BeginHttpClientRequest();
-            Assert.IsTrue(sut.HttpResponseMessage.IsSuccessStatusCode);
-            Assert.AreEqual(json, await sut.HttpResponseMessage.Content.ReadAsStringAsync());
-        }
-
         [TestMethod]
         public async Task ShouldTranslateJsonToBranchInfo()
         {
-            var latitude = 51.2926407;
-            var longitude = -114.0076065;
-            sut.SetLocation(latitude, longitude);
-            sut.InitializeHttpContent();
-            await sut.BeginHttpClientRequest();
-            await sut.CreateBranches();
+            SetAndInitializeRequest();
+            await BeginRequestAndCreateBranches();
             Assert.IsNotNull(sut.Branches);
             Assert.IsTrue(sut.Branches.Any(x => x.Name == "TOWER LANE MALL SAFEWAY"));
         }
@@ -76,6 +59,18 @@ namespace BankLocator_Test
         public void ShouldThrowExceptionOnUninitializedHttpContentObject()
         {
             Assert.ThrowsException<Exception>(() => { var content = sut.HttpContent; });
+        }
+
+        private void SetAndInitializeRequest()
+        {
+            sut.SetLocation(latitude, longitude);
+            sut.InitializeHttpContent();
+        }
+
+        private async Task BeginRequestAndCreateBranches()
+        {
+            await sut.BeginHttpClientRequest();
+            await sut.CreateBranches();
         }
     }
 

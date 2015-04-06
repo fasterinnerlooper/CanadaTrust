@@ -28,8 +28,8 @@
                 <TextBlock x:Name="Address" Tap="Address_Tap" Margin="20,0,0,0"  Foreground="{StaticResource PhoneAccentBrush}" />
                 <TextBlock x:Name="BranchLabel" Style="{StaticResource PhoneTextLargeStyle}">branch</TextBlock>
                 <TextBlock x:Name="BranchNumber" Margin="20,0,0,0" />
-                <TextBlock x:Name="DistanceLabel" Style="{StaticResource PhoneTextLargeStyle}">distance</TextBlock>
-                <TextBlock x:Name="Distance" Margin="20,0,0,0" />
+                <TextBlock x:Name="DistanceLabel" Visibility="Collapsed" Style="{StaticResource PhoneTextLargeStyle}">distance</TextBlock>
+                <TextBlock x:Name="Distance" Visibility="Collapsed" Margin="20,0,0,0" />
                 <TextBlock x:Name="HoursLabel" Style="{StaticResource PhoneTextLargeStyle}">hours</TextBlock>
                 <TextBlock x:Name="Hours" Margin="20,0,0,0" />
                 <TextBlock x:Name="PhoneNumberLabel" Style="{StaticResource PhoneTextLargeStyle}">phone</TextBlock>

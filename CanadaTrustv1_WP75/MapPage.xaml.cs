@@ -15,7 +15,6 @@ using Microsoft.Phone.Controls.Maps;
 using Microsoft.Phone.Maps.Services;
 using System.Collections.ObjectModel;
 using System.Device.Location;
-using CanadaTrustv1.Models;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using System.Windows.Interop;
@@ -28,232 +27,102 @@ using BankLocator.Models;
 using BankLocator_Common.Helpers;
 using BankLocator_Common.Locators;
 using Windows.Devices.Geolocation;
+using CanadaTrustv1.ViewModel;
+using BankLocator_Common.Models;
+using Microsoft.Phone.Shell;
 
 namespace CanadaTrustv1
 {
 
     public partial class MapPage : PhoneApplicationPage
     {
-        GeoCoordinateWatcher coordinateWatcher;
-        ReverseGeocodeQuery reverseGeocodeQuery = new ReverseGeocodeQuery();
-        TDLocatorRequest locatorRequest = new TDLocatorRequest();
-        string currentAddress;
-        GeoCoordinate lastLocation = new GeoCoordinate();
-        Regex URLStringRegex,
-              mapIDNumberRegex,
-              BranchNumberRegex,
-              PhoneNumberRegex,
-              AddressRegex,
-              Address2Regex,
-              HoursRegex,
-              DistanceRegex;
         Pushpin centreLocation;
-        LocationRect viewportSize = null;
-        HtmlDocument doc;
+        MapPageViewModel viewModel;
+        public bool ShowATMs = true;
 
         public MapPage()
         {
             InitializeComponent();
-            StartPositionWatching();
+            viewModel = new MapPageViewModel(this);
+            viewModel.StartPositionWatching();
         }
 
-        public void StartPositionWatching()
+        public void Show(string message = null, string title = null, MessageBoxButton? button = null)
         {
-            coordinateWatcher = new GeoCoordinateWatcher();
-            coordinateWatcher.MovementThreshold = 50;
-
-            coordinateWatcher.PositionChanged += (s, e) =>
+            if (button != null)
             {
-                if (lastLocation != coordinateWatcher.Position.Location)
-                {
-                    mapLoading.Visibility = System.Windows.Visibility.Visible;
-                    setLocation();
-                }
-            };
-            coordinateWatcher.Start();
-        }
-
-        private async void setLocation()
-        {
-            Geolocator geolocator = new Geolocator();
-            geolocator.DesiredAccuracy = PositionAccuracy.High;
-            Geoposition geoposition = await geolocator.GetGeopositionAsync(TimeSpan.FromSeconds(10), TimeSpan.FromMinutes(1));
-            if (!reverseGeocodeQuery.IsBusy)
+                MessageBox.Show(message, title, (MessageBoxButton)button);
+            }
+            else
             {
-                reverseGeocodeQuery.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-                if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == false)
-                {
-                    MessageBox.Show("There was a problem connecting to the remote location service. Please check your internet connection and try again.", "Location Services problem", MessageBoxButton.OK);
-                    return;
-                }
-                try
-                {
-                    reverseGeocodeQuery.QueryCompleted += geocodeService_ReverseGeocodeCompleted;
-                    reverseGeocodeQuery.QueryAsync();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                MessageBox.Show(message);
             }
         }
 
-        private void geocodeService_ReverseGeocodeCompleted(object sender, QueryCompletedEventArgs<IList<MapLocation>> e)
+        public void DrawBranchesOnMap(List<BMOBranch> branches)
         {
-            var query = sender as ReverseGeocodeQuery;
-            try
-            {
-                if (e.Result.Count() > 0)
-                {
-                    foreach (MapLocation result in e.Result)
-                    {
-                        var address = result.Information.Address;
-                        if (string.IsNullOrEmpty(address.HouseNumber) &&
-                            string.IsNullOrEmpty(address.Street) &&
-                            string.IsNullOrEmpty(address.StateCode))
-                        {
-                            setLocation();
-                        }
-                        if (result.Information.Address.Country == "Canada")
-                        {
-                            locatorRequest.FullAddress = String.Format("{0} {1}, {2}, {3}", address.HouseNumber,
-                                address.Street, address.City, address.State);
-                            Uri compiledUri = locatorRequest.compileUri();
-                            viewportSize = null;
-                            setupCentrePushpin(query.GeoCoordinate.Latitude,query.GeoCoordinate.Longitude);
-                            callWebsite(compiledUri);
-                            break;
-                        }
-                        MessageBox.Show("This app is not available in your location/region.\nPlease try again later.", "Outside of Canada", MessageBoxButton.OK);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("There was a problem connecting to the remote location service. Please check your internet connection and try again.", "Location Services problem", MessageBoxButton.OK);
-                return;
-            }
-        }
-        private void webRequestCallback(IAsyncResult result)
-        {
-            HttpWebRequest request = (HttpWebRequest)result.AsyncState;
-            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(result);
-
-            using (Stream stream = response.GetResponseStream())
-            {
-                doc = new HtmlDocument();
-                doc.Load(stream);
-                HtmlNode error = doc.DocumentNode.SelectSingleNode("//div[@class='copyerror']");
-                if (error != null)
-                {
-                    //Are we in the US? Check the first.
-                    Dispatcher.BeginInvoke(() =>
-                    {
-                        MessageBox.Show("The service is unavailable, please try again later");
-                    });
-                    return;
-                }
-                HtmlNode mapURL = doc.DocumentNode.SelectSingleNode("//img[@usemap='#pins']");
-                string mapURLstring = mapURL.Attributes["src"].Value;
-
-                setupRegex();
-
-                MatchCollection matches = URLStringRegex.Matches(mapURLstring);
-                Dispatcher.BeginInvoke(() =>
-                {
-                    createBranchesCollection(doc, matches);
-                });
-            }
-        }
-        private void callWebsite(Uri uri)
-        {
+            mapLoading.Visibility = System.Windows.Visibility.Visible;
             bingMap.Children.Clear();
-            TDLocator tdLocator = new TDLocator(uri);
-            tdLocator.BeginWebRequest(webRequestCallback);
+            if (centreLocation != null)
+            {
+                bingMap.Children.Add(centreLocation);
+            }
+            viewModel.ViewportSize = null;
+            foreach (var branch in branches)
+            {
+                this.addPushpinsToMap(branch);
+                this.setupMapViewport(branch);
+            }
+            var fewerButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            var moreButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
+            fewerButton.IsEnabled = viewModel.CanDisplayFewer();
+            moreButton.IsEnabled = viewModel.CanDisplayMore();
+            mapLoading.Visibility = System.Windows.Visibility.Collapsed;
         }
 
-        private void addPushpinsToMap(BranchImpl branch)
+        private void addPushpinsToMap(BMOBranch branch)
         {
             Pushpin pushpin = new Pushpin()
             {
-                Location = branch.Location,
+                Location = new GeoCoordinate() { Latitude = branch.Location.Latitude, Longitude = branch.Location.Longitude },
                 Content = branch.Address,
-                Tag = branch.BranchID
+                Tag = branch.Id
             };
             pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
-            App.Branches.Add(branch);
             bingMap.Children.Add(pushpin);
         }
 
-        private async void createBranchesCollection(HtmlDocument doc, MatchCollection matches)
+        private void setupMapViewport(BMOBranch branch)
         {
-            for (var i = 2; i <= 6; i++)
+            if (viewModel.ViewportSize == null)
             {
-                var BranchNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc,
-                    BranchNumberRegex);
-                BranchImpl branch = new BranchImpl()
-                {
-                    MapID =
-                        Int32.Parse(MatchHelper.Match("//tr[@class='table'][" + i + "]/td[1]/strong", doc,
-                            mapIDNumberRegex)),
-                    BranchID = BranchNumber == "" ? 0 : Int32.Parse(BranchNumber),
-                    PhoneNumber = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[5]", doc, PhoneNumberRegex),
-                    Address = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//strong", doc, AddressRegex),
-                    AddressLine2 = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[2]//.", doc, Address2Regex),
-                    Hours = MatchHelper.MatchAndReturnHtml("//tr[@class='table'][" + i + "]/td[4]//.", doc,
-                    HoursRegex).Replace("<br>", "\n"),
-                    Distance = MatchHelper.Match("//tr[@class='table'][" + i + "]/td[3]", doc, DistanceRegex),
-                    Location = new GeoCoordinate()
-                    {
-                        Latitude = Double.Parse(matches[i - 2].Groups[1].Value),
-                        Longitude = Double.Parse(matches[i - 2].Groups[2].Value)
-                    }
-
-                };
-                bingMap.Dispatcher.BeginInvoke(new Action(delegate()
-                {
-                    var pushpin = new Pushpin()
-                    {
-                        Location = branch.Location,
-                        Content = branch.Address,
-                        Tag = branch.BranchID
-                    };
-                    pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(pushpin_Tap);
-                    bingMap.Children.Add(pushpin);
-                    mapLoading.Visibility = System.Windows.Visibility.Collapsed;
-                }));
-                setupMapViewport(branch);
-                App.Branches.Add(branch);
-            }
-        }
-
-        private void setupMapViewport(BranchImpl branch)
-        {
-            if (viewportSize == null)
-            {
-                viewportSize = new LocationRect(
+                var viewport = new LocationRect(
                     branch.Location.Latitude,
                     branch.Location.Longitude,
                     branch.Location.Latitude,
                     branch.Location.Longitude);
+                viewModel.ViewportSize = viewport;
                 return;
             }
-            double north = viewportSize.North;
-            double south = viewportSize.South;
-            double east = viewportSize.East;
-            double west = viewportSize.West;
-            viewportSize.North = branch.Location.Latitude > north ? branch.Location.Latitude : north;
-            viewportSize.South = branch.Location.Latitude < south ? branch.Location.Latitude : south;
-            viewportSize.East = branch.Location.Longitude > east ? branch.Location.Longitude : east;
-            viewportSize.West = branch.Location.Longitude < west ? branch.Location.Longitude : west;
+            double north = viewModel.ViewportSize.North;
+            double south = viewModel.ViewportSize.South;
+            double east = viewModel.ViewportSize.East;
+            double west = viewModel.ViewportSize.West;
+            var newviewport = new LocationRect() { 
+            North = branch.Location.Latitude > north ? branch.Location.Latitude : north,
+            South = branch.Location.Latitude < south ? branch.Location.Latitude : south,
+            East = branch.Location.Longitude > east ? branch.Location.Longitude : east,
+            West = branch.Location.Longitude < west ? branch.Location.Longitude : west
+        };
+            viewModel.ViewportSize = newviewport;
             bingMap.Dispatcher.BeginInvoke(new Action(delegate()
             {
-                bingMap.SetView(viewportSize);
+                bingMap.SetView(viewModel.ViewportSize);
             }));
             //TODO: Centre Map using Map's centre and our current position
         }
 
-        private void setupCentrePushpin(double latitude, double longitude)
+        public void setupCentrePushpin(double latitude, double longitude)
         {
             System.Device.Location.GeoCoordinate locator = new System.Device.Location.GeoCoordinate();
             locator.Latitude = latitude;
@@ -268,35 +137,16 @@ namespace CanadaTrustv1
             }));
         }
 
-        private void setupRegex()
-        {
-            //string URLStringPattern = @"pp=([0-9\\.]*),([0-9-\\.]*);[0-9]+;(.)";
-            string URLStringPattern = @"pp=(\d{2}\.\d*),(-\d{3}\.\d*);\d*;(\d+)";
-            URLStringRegex = new Regex(URLStringPattern, RegexOptions.IgnoreCase);
-            string mapIDNumberPattern = @"([0-9])\.";
-            mapIDNumberRegex = new Regex(mapIDNumberPattern, RegexOptions.IgnoreCase);
-            string BranchNumberPattern = @".*Branch # ([0-9][0-9][0-9][0-9]).*";
-            BranchNumberRegex = new Regex(BranchNumberPattern, RegexOptions.IgnoreCase);
-            string PhoneNumberPattern = @".*(\([0-9][0-9][0-9]\)[ ]?[0-9][0-9][0-9]\-[0-9][0-9][0-9][0-9]).*";
-            PhoneNumberRegex = new Regex(PhoneNumberPattern, RegexOptions.IgnoreCase);
-            string AddressPattern = @"(.*)";
-            AddressRegex = new Regex(AddressPattern, RegexOptions.IgnoreCase);
-            string Address2Pattern = @"(\w*, \w\w \w\d\w \d\w\d)";
-            Address2Regex = new Regex(Address2Pattern, RegexOptions.IgnoreCase);
-            string HoursPattern = @"(Mon.*PM)";
-            HoursRegex = new Regex(HoursPattern, RegexOptions.IgnoreCase);
-            string DistancePattern = @"([0-9]*\.[0-9]* km)";
-            DistanceRegex = new Regex(DistancePattern, RegexOptions.IgnoreCase);
-        }
-
         private void pushpin_Tap(object sender, RoutedEventArgs e)
         {
             Pushpin pushpin = sender as Pushpin;
-            App.currentBranch = (int)pushpin.Tag;
+            var branchID = Convert.ToInt32(pushpin.Tag);
+            App.Branch = viewModel.GetBranch(branchID);
             NavigationService.Navigate(new Uri("/MapDetailsPage.xaml", UriKind.Relative));
             mapLoadingTextBlock.Text = "Loading";
         }
 
+        #region Navigation Elements
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             if (!IsolatedStorageSettings.ApplicationSettings.Contains("LocationConsent"))
@@ -367,5 +217,32 @@ namespace CanadaTrustv1
             wbTask.Uri = new Uri("http://sjetha.uservoice.com");
             wbTask.Show();
         }
+
+        private void ApplicationBarIconButton_MoreBranchesClick(object sender, EventArgs e)
+        {
+            viewModel.BranchDisplaySize += 5;
+        }
+
+        private void ApplicationBarIconButton_FewerBranchesClick(object sender, EventArgs e)
+        {
+            viewModel.BranchDisplaySize -= 5;
+        }
+
+        private void ApplicationBarMenuItem_ShowOnlyClick(object sender, EventArgs e)
+        {
+            var menuItem = ApplicationBar.MenuItems[0] as ApplicationBarMenuItem;
+            if (this.ShowATMs)
+            {
+                menuItem.Text = "Show Branches and ATMs";
+                this.ShowATMs = false;
+            }
+            else
+            {
+                menuItem.Text = "Show Branches Only";
+                this.ShowATMs = true;
+            }
+            viewModel.BranchDisplaySize = viewModel.BranchDisplaySize;
+        }
     }
+#endregion
 }

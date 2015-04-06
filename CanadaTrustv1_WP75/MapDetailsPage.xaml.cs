@@ -12,40 +12,43 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using BankLocator.Models;
-using CanadaTrustv1.Models;
+using BankLocator_Common.Models;
+using System.Device.Location;
 
 namespace CanadaTrustv1
 {
     public partial class MapDetailsPage : PhoneApplicationPage
     {
-        public BranchImpl Branch;
+        public BMOBranch Branch;
         public MapDetailsPage()
         {
             InitializeComponent();
-            Branch = App.Branches.First<BranchImpl>(x => x.BranchID == App.currentBranch);
-            if (Branch.BranchID == 0)
+            Branch = App.Branch;
+            if (Branch.IsBranch)
             {
-                BranchNumber.Text = "Green Machine ABM Only";
-                HoursLabel.Visibility = System.Windows.Visibility.Collapsed;
-                PhoneNumberLabel.Visibility = System.Windows.Visibility.Collapsed;
+                BranchNumber.Text = Branch.getFormattedBranchID();
             }
             else
             {
-                BranchNumber.Text = Branch.getFormattedBranchID();
-                HoursLabel.Visibility = System.Windows.Visibility.Visible;
-                PhoneNumberLabel.Visibility = System.Windows.Visibility.Visible;
+                BranchNumber.Text = "ATM Only";
             }
-            PhoneNumber.Text = Branch.PhoneNumber;
+            PhoneNumber.Text = Branch.Phone;
             Address.Text = Branch.Address;
             Distance.Text = Branch.Distance;
-            Hours.Text = Branch.Hours;
+            var HoursDesc = Branch.OpenHoursDescription;
+            if (Branch.AbmCount > 0)
+            {
+                HoursDesc += "\n";
+                HoursDesc += Branch.AbmHours.First().Trim();
+            }
+            Hours.Text = Branch.OpenHoursDescription;
         }
 
         private void Address_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             LabeledMapLocation mapLocation = new LabeledMapLocation() {
                 Label = Branch.Address + " " + Branch.AddressLine2,
-                Location = Branch.Location
+                Location = new GeoCoordinate(Branch.Location.Latitude, Branch.Location.Longitude)
             };
             BingMapsDirectionsTask directionTask = new BingMapsDirectionsTask();
             directionTask.End = mapLocation;

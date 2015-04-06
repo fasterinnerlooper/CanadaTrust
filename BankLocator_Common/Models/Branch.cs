@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace BankLocator.Models
@@ -14,6 +15,7 @@ namespace BankLocator.Models
         public string PhoneNumber { get; set; }
         public string Hours { get; set; }
         public string Distance { get; set; }
+        public Dictionary<int, double> Location { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

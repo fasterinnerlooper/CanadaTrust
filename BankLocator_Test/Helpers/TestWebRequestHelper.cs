@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using BankLocator_Common.Helpers;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace BankLocator_Test
+namespace BankLocator_Test.Helpers
 {
     [TestClass]
     public class TestWebRequestHelper

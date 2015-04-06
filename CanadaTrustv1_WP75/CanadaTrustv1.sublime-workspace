@@ -115,7 +115,7 @@
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -130,6 +130,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"4005",
+			"summerwood",
+			"isbranch\":true",
 			"(.*)",
 			"	",
 			"[(YES|NO) $",
@@ -280,7 +283,7 @@
 		"_vintageous_reset_during_init": true,
 		"vintage":
 		{
-			"_cmdline_cd": "C:\\Users\\Shafiq\\Documents\\GitHub\\CanadaTrust\\Backup"
+			"_cmdline_cd": "C:\\Users\\Shafiq\\AppData\\Roaming\\Sublime Text 3\\Packages"
 		}
 	},
 	"show_minimap": true,

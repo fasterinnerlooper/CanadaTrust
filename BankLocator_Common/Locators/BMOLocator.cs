@@ -88,6 +88,7 @@ namespace BankLocator_Common.Locators
         {
             string jsonText = await httpResponseMessage.Content.ReadAsStringAsync();
             var rootObject = JsonConvert.DeserializeObject<RootObject>(jsonText);
+            var localBranches = rootObject.d;
             Branches = rootObject.d;
         }
 

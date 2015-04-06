@@ -67,8 +67,11 @@
 
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar Mode="Minimized" IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBar Mode="Default"  IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="ShowFewerButton" Text="Zoom Map In" IsEnabled="False" Click="ApplicationBarIconButton_FewerBranchesClick" IconUri="Images/appbar_button3.png" />
+            <shell:ApplicationBarIconButton x:Name="ShowMoreButton" Text="Zoom Map Out" IsEnabled="True" Click="ApplicationBarIconButton_MoreBranchesClick" IconUri="Images/appbar_button4.png" />
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Show Branches Only" Click="ApplicationBarMenuItem_ShowOnlyClick" />
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_AboutClick" />
                 <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarMenuItem_SettingsClick" />
                 <shell:ApplicationBarMenuItem Text="Rate &amp; Review" Click="ApplicationBarIconButton_RateClick" />
