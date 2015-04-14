@@ -1,5 +1,4 @@
-﻿<phone:PhoneApplicationPage 
-    x:Class="CanadaTrustv1.MapPage"
+﻿<phone:PhoneApplicationPage
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -9,12 +8,29 @@
     xmlns:my="clr-namespace:System.Device.Location;assembly=System.Device"
     xmlns:ads="clr-namespace:MC.Phone.Ads;assembly=MC.Phone.Ads"
     xmlns:BingMap="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
+    xmlns:WindowsPhone8="clr-namespace:Microsoft.AdMediator.WindowsPhone8;assembly=Microsoft.AdMediator.WindowsPhone8" 
+    x:Class="CanadaTrustv1.MapPage"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Default"  IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Show Branches Only" Click="ApplicationBarMenuItem_ShowOnlyClick" />
+                <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_AboutClick" />
+                <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarMenuItem_SettingsClick" />
+                <shell:ApplicationBarMenuItem Text="Rate &amp; Review" Click="ApplicationBarIconButton_RateClick" />
+                <shell:ApplicationBarMenuItem Text="Feedback &amp; Suggestions" Click="ApplicationBarMenuItem_FeedbackClick" />
+            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton x:Name="ShowFewerButton" Text="Zoom Map In" IsEnabled="False" Click="ApplicationBarIconButton_FewerBranchesClick" IconUri="Images/appbar_button3.png" />
+            <shell:ApplicationBarIconButton x:Name="ShowMoreButton" Text="Zoom Map Out" IsEnabled="True" Click="ApplicationBarIconButton_MoreBranchesClick" IconUri="Images/appbar_button4.png" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -27,57 +43,38 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ads:AdControl
-            Grid.Row="0"
-            Height="80"
-            Width="480"
-            FallbackAdProviderName="AdDuplex"
-            xmlns:pubcentre="clr-namespace:MC.Phone.Ads.PubCenter;assembly=MC.Phone.Ads.PubCenter"
-            xmlns:adduplex="clr-namespace:MC.Phone.Ads.AdDuplex;assembly=MC.Phone.Ads.AdDuplex"
-            xmlns:smaato="clr-namespace:MC.Phone.Ads.Smaato;assembly=MC.Phone.Ads.Smaato">
-                <ads:AdControl.AdProviders>
-                    <smaato:SmaatoAdProvider Publisher="923873664" AdSpace="65817715" />
-                    <pubcentre:PubCenterAdProvider Application="a7564908-017a-41df-9bd6-d63773a9545e" AdUnit="148140" />
-                    <adduplex:AdDuplexAdProvider App="44087" />
-                </ads:AdControl.AdProviders>
-            </ads:AdControl>
+            <WindowsPhone8:AdMediatorControl
+                x:Name="AdMediator_721CF3"
+                HorizontalAlignment="Left"
+                Height="80"
+                Id="AdMediator-Id-6BFBBD12-0D6E-4758-B829-A4752DF17AF1"
+                Grid.Row="0"
+                VerticalAlignment="Top"
+                Width="480"/>
             <Grid Grid.Row="1">
-                <BingMap:Map Name="bingMap"
-                         Width="Auto"
-                         CopyrightVisibility="Visible"
-                         ZoomLevel="2.93"
-                         VerticalAlignment="Stretch"
-                         HorizontalAlignment="Stretch"
-                         CredentialsProvider="{Binding Path=Key}">
+                <BingMap:Map x:Name="bingMap"
+					Width="Auto"
+					CopyrightVisibility="Visible"
+					ZoomLevel="2.93"
+					VerticalAlignment="Stretch"
+					HorizontalAlignment="Stretch"
+					CredentialsProvider="{Binding Key}">
                     <BingMap:Map.Center>
                         <my:GeoCoordinate Latitude="71.75" Longitude="-97" />
                     </BingMap:Map.Center>
                 </BingMap:Map>
                 <Grid
-                    x:Name="mapLoading"
-                    Background="Black"
-                    Opacity="0.5"
-                    Visibility="Collapsed">
-                    <TextBlock x:Name="mapLoadingTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Margin="0,0,0,100">Updating</TextBlock>
+					x:Name="mapLoading"
+					Background="Black"
+					Opacity="0.5"
+					Visibility="Collapsed">
+                    <TextBlock x:Name="mapLoadingTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Margin="0,0,0,100">
+						<Run Text="Updating"/>
+                    </TextBlock>
                     <ProgressBar IsIndeterminate="True" />
                 </Grid>
             </Grid>
         </Grid>
     </Grid>
-
-    <!--Sample code showing usage of ApplicationBar-->
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar Mode="Default"  IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="ShowFewerButton" Text="Zoom Map In" IsEnabled="False" Click="ApplicationBarIconButton_FewerBranchesClick" IconUri="Images/appbar_button3.png" />
-            <shell:ApplicationBarIconButton x:Name="ShowMoreButton" Text="Zoom Map Out" IsEnabled="True" Click="ApplicationBarIconButton_MoreBranchesClick" IconUri="Images/appbar_button4.png" />
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Show Branches Only" Click="ApplicationBarMenuItem_ShowOnlyClick" />
-                <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_AboutClick" />
-                <shell:ApplicationBarMenuItem Text="Settings" Click="ApplicationBarMenuItem_SettingsClick" />
-                <shell:ApplicationBarMenuItem Text="Rate &amp; Review" Click="ApplicationBarIconButton_RateClick" />
-                <shell:ApplicationBarMenuItem Text="Feedback &amp; Suggestions" Click="ApplicationBarMenuItem_FeedbackClick" />
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

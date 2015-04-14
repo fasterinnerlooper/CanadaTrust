@@ -23,8 +23,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <controls:Pivot Grid.Row="1">
-            <controls:PivotItem Header="what's new?">
+        <phone:Pivot Grid.Row="1">
+            <phone:PivotItem Header="what's new?">
                 <ScrollViewer>
                     <StackPanel Margin="0">
                         <TextBlock TextWrapping="Wrap">
@@ -175,8 +175,8 @@
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
-            </controls:PivotItem>
-            <controls:PivotItem Header="about">
+            </phone:PivotItem>
+            <phone:PivotItem Header="about">
                 <!--ContentPanel - place additional content here-->
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
                     <StackPanel>
@@ -189,8 +189,8 @@
                         <HyperlinkButton Click="HyperlinkButton_Click">Donate through paypal</HyperlinkButton>
                     </StackPanel>
                 </Grid>
-            </controls:PivotItem>
-            <controls:PivotItem Header="Privacy Policy">
+            </phone:PivotItem>
+            <phone:PivotItem Header="Privacy Policy">
                 <ScrollViewer HorizontalAlignment="Left" Height="562" VerticalAlignment="Top" Width="456">
                     <StackPanel>
                         <TextBlock TextWrapping="Wrap" TextAlignment="Left">
@@ -208,8 +208,8 @@
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
-            </controls:PivotItem>
-        </controls:Pivot>
+            </phone:PivotItem>
+        </phone:Pivot>
     </Grid>
 
     <!--Sample code showing usage of ApplicationBar-->
