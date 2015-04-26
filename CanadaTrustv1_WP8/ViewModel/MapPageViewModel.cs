@@ -15,7 +15,7 @@ using Windows.UI.Core;
 
 namespace CanadaTrustv1.ViewModel
 {
-    class MapPageViewModel
+    public class MapPageViewModel
     {
         private MapPage view;
         private Geolocator geoLocator;
@@ -37,20 +37,29 @@ namespace CanadaTrustv1.ViewModel
             {
                 return this.branchDisplaySize;
             }
-            set {
+            set
+            {
                 this.branchDisplaySize = value;
+                List<BMOBranch> branches;
                 if (view.ShowATMs)
                 {
-                    view.DrawBranchesOnMap(bmoLocator.Branches.Take(this.branchDisplaySize).ToList<BMOBranch>());
+                    branches = bmoLocator.GetAllBranches(this.branchDisplaySize);
                 }
                 else
                 {
-                    view.DrawBranchesOnMap(bmoLocator.Branches.Where(x=>x.IsBranch==true).Take(this.branchDisplaySize).ToList<BMOBranch>());
+                    branches = bmoLocator.GetAtms(this.branchDisplaySize);
                 }
+                if (branches.Count == 0)
+                {
+                    MessageBox.Show("No branches were returned. Please try changing the settings or try again later");
+                    return;
+                }
+                view.DrawBranchesOnMap(branches);
             }
         }
 
-        public bool CanDisplayMore() {
+        public bool CanDisplayMore()
+        {
             return bmoLocator.Branches.Count > this.branchDisplaySize;
         }
 
@@ -84,7 +93,7 @@ namespace CanadaTrustv1.ViewModel
             Geoposition geoposition = await geoLocator.GetGeopositionAsync(TimeSpan.FromSeconds(10), TimeSpan.FromMinutes(1));
             if (lastLocation != geoposition)
             {
-                this.view.Dispatcher.BeginInvoke(() => 
+                this.view.Dispatcher.BeginInvoke(() =>
                 {
                     view.mapLoading.Visibility = System.Windows.Visibility.Visible;
                     this.setLocation(geoposition);
@@ -132,12 +141,18 @@ namespace CanadaTrustv1.ViewModel
                             result.Information.Address.Country == "Canada")
                         {
                             viewportSize = null;
-                            bmoLocator.SetLocation(query.GeoCoordinate.Latitude,query.GeoCoordinate.Longitude);
+                            bmoLocator.SetLocation(query.GeoCoordinate.Latitude, query.GeoCoordinate.Longitude);
                             bmoLocator.InitializeHttpContent();
                             await bmoLocator.BeginHttpClientRequest();
                             await bmoLocator.CreateBranches();
-                            view.setupCentrePushpin(query.GeoCoordinate.Latitude,query.GeoCoordinate.Longitude);
-                            view.DrawBranchesOnMap(bmoLocator.Branches.Take(this.branchDisplaySize).ToList<BMOBranch>());
+                            view.setupCentrePushpin(query.GeoCoordinate.Latitude, query.GeoCoordinate.Longitude);
+                            var branches = bmoLocator.GetAllBranches(this.BranchDisplaySize);
+                            if (branches.Count == 0)
+                            {
+                                MessageBox.Show("No branches were returned. Please try changing the settings or try again later");
+                                return;
+                            }
+                            view.DrawBranchesOnMap(branches);
                             break;
                         }
                         view.Show("This app is not available in your location/region.\nPlease try again later.", "Outside of Canada", MessageBoxButton.OK);

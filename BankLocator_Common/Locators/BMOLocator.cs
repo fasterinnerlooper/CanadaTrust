@@ -33,7 +33,7 @@ namespace BankLocator_Common.Locators
         {
             get
             {
-                if(httpContent==null)
+                if (httpContent == null)
                 {
                     throw new Exception("HttpContent object has not been initialized");
                 }
@@ -47,7 +47,7 @@ namespace BankLocator_Common.Locators
         public void InitializeHttpContent()
         {
             httpContent = new StringContent(String.Format(requestBody, Latitude, Longitude), Encoding.UTF8, "application/json");
-         }
+        }
 
         public async Task BeginHttpClientRequest()
         {
@@ -58,9 +58,12 @@ namespace BankLocator_Common.Locators
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         private HttpResponseMessage httpResponseMessage;
-        public HttpResponseMessage HttpResponseMessage { get
+        public HttpResponseMessage HttpResponseMessage
+        {
+            get
             {
-                if (httpResponseMessage == null) {
+                if (httpResponseMessage == null)
+                {
                     throw new Exception("HttpResponseMessage has not been initialized");
                 }
                 return httpResponseMessage;
@@ -71,13 +74,16 @@ namespace BankLocator_Common.Locators
             }
         }
         private HttpClient httpClient = null;
-        public HttpClient HttpClient { get {
-            if (httpClient == null)
+        public HttpClient HttpClient
+        {
+            get
             {
-                throw new Exception("Initialization of the HttpWebRequest object has not been run");
+                if (httpClient == null)
+                {
+                    throw new Exception("Initialization of the HttpWebRequest object has not been run");
+                }
+                return httpClient;
             }
-            return httpClient;
-        }
             private set
             {
                 httpClient = value;
@@ -92,6 +98,31 @@ namespace BankLocator_Common.Locators
             Branches = rootObject.d;
         }
 
-        public List<BMOBranch> Branches { get; set; }
+        private List<BMOBranch> branches;
+        public List<BMOBranch> Branches
+        {
+            get
+            {
+            if (this.branches == null)
+            {
+                this.branches = new List<BMOBranch>();
+            }
+                return this.branches;
+            }
+            set
+            {
+                this.branches = value;
+            }
+        }
+
+        public List<BMOBranch> GetAllBranches(int size)
+        {
+            return this.Branches.Take(size).ToList<BMOBranch>();
+        }
+
+        public List<BMOBranch> GetAtms(int size)
+        {
+            return this.Branches.Where(x => x.IsBranch == true).Take(size).ToList<BMOBranch>();
+        }
     }
 }

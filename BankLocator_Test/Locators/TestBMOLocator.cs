@@ -61,6 +61,20 @@ namespace BankLocator_Test.Locators
             Assert.ThrowsException<Exception>(() => { var content = sut.HttpContent; });
         }
 
+        [TestMethod]
+        public void ShouldReturnAnEmptyArrayIfNoBranchesAreFound()
+        {
+            var branches = sut.GetAllBranches(10);
+            Assert.AreEqual(0, branches.Count);
+        }
+
+        [TestMethod]
+        public void ShouldReturnAnEmptyArrayIfNoAtmsAreFound()
+        {
+            var branches = sut.GetAtms(10);
+            Assert.AreEqual(0, branches.Count);
+        }
+
         private void SetAndInitializeRequest()
         {
             sut.SetLocation(latitude, longitude);

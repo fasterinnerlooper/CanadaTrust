@@ -108,12 +108,13 @@ namespace CanadaTrustv1
             double south = viewModel.ViewportSize.South;
             double east = viewModel.ViewportSize.East;
             double west = viewModel.ViewportSize.West;
-            var newviewport = new LocationRect() { 
-            North = branch.Location.Latitude > north ? branch.Location.Latitude : north,
-            South = branch.Location.Latitude < south ? branch.Location.Latitude : south,
-            East = branch.Location.Longitude > east ? branch.Location.Longitude : east,
-            West = branch.Location.Longitude < west ? branch.Location.Longitude : west
-        };
+            var newviewport = new LocationRect()
+            {
+                North = branch.Location.Latitude > north ? branch.Location.Latitude : north,
+                South = branch.Location.Latitude < south ? branch.Location.Latitude : south,
+                East = branch.Location.Longitude > east ? branch.Location.Longitude : east,
+                West = branch.Location.Longitude < west ? branch.Location.Longitude : west
+            };
             viewModel.ViewportSize = newviewport;
             bingMap.Dispatcher.BeginInvoke(new Action(delegate()
             {
@@ -169,7 +170,7 @@ namespace CanadaTrustv1
                 MessageBox.Show("Currently, this app requires location services to function. If you would like to enable location services, you can do so from the settings menu.", "Location Services required", MessageBoxButton.OK);
                 return;
             }
-            int TimesRun = IsolatedStorageSettings.ApplicationSettings.Contains("TimesRun") ? (int) IsolatedStorageSettings.ApplicationSettings["TimesRun"] : 0;
+            int TimesRun = IsolatedStorageSettings.ApplicationSettings.Contains("TimesRun") ? (int)IsolatedStorageSettings.ApplicationSettings["TimesRun"] : 0;
             if (TimesRun == 3 || TimesRun - 3 % 5 == 0)
             {
                 MessageBoxResult consent = MessageBox.Show("Please consider rating and reviewing this app. Plese tap 'OK' to be taken to the marketplace screen", "Rate and review", MessageBoxButton.OKCancel);
@@ -242,6 +243,14 @@ namespace CanadaTrustv1
                 this.ShowATMs = true;
             }
             viewModel.BranchDisplaySize = viewModel.BranchDisplaySize;
+        }
+
+        private void Recentre_Click(object sender, EventArgs e)
+        {
+            if (viewModel.ViewportSize != null)
+            {
+                bingMap.SetView(viewModel.ViewportSize);
+            }
         }
     }
 #endregion

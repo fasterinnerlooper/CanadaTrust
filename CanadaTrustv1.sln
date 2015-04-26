@@ -9,7 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanadaTrustv1_WP8", "Canada
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankLocator_Common", "BankLocator_Common\BankLocator_Common.csproj", "{26DDF679-4561-47F1-9CDB-8D3B69AA44CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankLocator_Test", "BankLocator_Test\BankLocator_Test.csproj", "{FCB191CA-5D8E-4B45-AC70-AD64190C6289}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common_Test", "BankLocator_Test\Common_Test.csproj", "{FCB191CA-5D8E-4B45-AC70-AD64190C6289}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C5FCB489-5889-4D31-B828-63F4303E6D28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WP8_Test", "WP8_Test\WP8_Test.csproj", "{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,8 +105,34 @@ Global
 		{FCB191CA-5D8E-4B45-AC70-AD64190C6289}.Release|x86.ActiveCfg = Release|x86
 		{FCB191CA-5D8E-4B45-AC70-AD64190C6289}.Release|x86.Build.0 = Release|x86
 		{FCB191CA-5D8E-4B45-AC70-AD64190C6289}.Release|x86.Deploy.0 = Release|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|ARM.ActiveCfg = Debug|ARM
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|ARM.Build.0 = Debug|ARM
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|ARM.Deploy.0 = Debug|ARM
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|x64.ActiveCfg = Debug|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|x86.ActiveCfg = Debug|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|x86.Build.0 = Debug|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Debug|x86.Deploy.0 = Debug|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|Any CPU.ActiveCfg = Release|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|ARM.ActiveCfg = Release|ARM
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|ARM.Build.0 = Release|ARM
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|ARM.Deploy.0 = Release|ARM
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|Mixed Platforms.Build.0 = Release|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|x64.ActiveCfg = Release|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|x86.ActiveCfg = Release|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|x86.Build.0 = Release|x86
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FCB191CA-5D8E-4B45-AC70-AD64190C6289} = {C5FCB489-5889-4D31-B828-63F4303E6D28}
+		{16B341B9-F713-4475-B3B2-4ECE3CF9AED6} = {C5FCB489-5889-4D31-B828-63F4303E6D28}
 	EndGlobalSection
 EndGlobal

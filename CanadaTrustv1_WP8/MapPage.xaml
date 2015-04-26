@@ -27,8 +27,9 @@
                 <shell:ApplicationBarMenuItem Text="Rate &amp; Review" Click="ApplicationBarIconButton_RateClick" />
                 <shell:ApplicationBarMenuItem Text="Feedback &amp; Suggestions" Click="ApplicationBarMenuItem_FeedbackClick" />
             </shell:ApplicationBar.MenuItems>
-            <shell:ApplicationBarIconButton x:Name="ShowFewerButton" Text="Zoom Map In" IsEnabled="False" Click="ApplicationBarIconButton_FewerBranchesClick" IconUri="Images/appbar_button3.png" />
-            <shell:ApplicationBarIconButton x:Name="ShowMoreButton" Text="Zoom Map Out" IsEnabled="True" Click="ApplicationBarIconButton_MoreBranchesClick" IconUri="Images/appbar_button4.png" />
+            <shell:ApplicationBarIconButton x:Name="ShowFewerButton" Text="Zoom In" IsEnabled="False" Click="ApplicationBarIconButton_FewerBranchesClick" IconUri="Images/appbar_button3.png" />
+            <shell:ApplicationBarIconButton x:Name="ShowMoreButton" Text="Zoom Out" IsEnabled="True" Click="ApplicationBarIconButton_MoreBranchesClick" IconUri="Images/appbar_button4.png" />
+            <shell:ApplicationBarIconButton x:Name="Recentre" Text="Recentre" IsEnabled="True" IconUri="Images/appbar_button2.png" Click="Recentre_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
