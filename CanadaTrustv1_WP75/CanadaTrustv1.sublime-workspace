@@ -9,9 +9,14 @@
 	[
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 104.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -79,6 +84,16 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Shafiq/Documents/GitHub/PlantIdentifier/WolframAlpha.Api.v2.Pcl/WolframAlpha.Api.v2.Pcl/WolframAlpha.Api.v2.Pcl/Class1.cs",
+		"/C/Users/Shafiq/Desktop/Austenland.2013.720p.BluRay.x264.DTS-WiKi-SDH.srt",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/8RSYTH7C/WebDeal (1).json",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/RDIMEFYH/WebDeal.json",
+		"/C/Users/Shafiq/Documents/GitHub/ExpressDeal/ExpressDealApp/Services/MobileServices/dailyexpressdeal/push.register.cs",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/6G5SD8UK/WebDeal.json",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/8RSYTH7C/WebDeal.json",
+		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/RDIMEFYH/WebDeal (1).json",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/.gitignore",
+		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP75/AboutPage.xaml",
 		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/Backup/MapPage.xaml.cs",
 		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP75/MapPage.xaml.cs",
 		"/C/Users/Shafiq/AppData/Roaming/Sublime Text 3/Packages/User/C#.sublime-settings",
@@ -86,7 +101,6 @@
 		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP8/Bin/Release/Microsoft.Advertising.Mobile.xml",
 		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP75/CanadaTrustv1.sublime-project",
 		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1.sln",
-		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/.gitignore",
 		"/C/Users/Shafiq/Documents/IISBookings/Web.config",
 		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/0NK4CJ17/deals.php",
 		"/C/Users/Shafiq/Documents/Visual Studio 2013/Projects/IISAlumni/.nuget/packages.config",
@@ -110,7 +124,6 @@
 		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/87SWWPXT/search.json",
 		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/0NK4CJ17/search (1).json",
 		"/C/Users/Shafiq/AppData/Local/Microsoft/Windows/INetCache/IE/0NK4CJ17/search.json",
-		"/C/Users/Shafiq/Documents/GitHub/CanadaTrust/CanadaTrustv1_WP75/AboutPage.xaml",
 		"/C/Program Files (x86)/Steam/SteamApps/common/Luftrausers/data/res/enemies.json"
 	],
 	"find":
@@ -237,6 +250,7 @@
 	{
 		"height": 94.0
 	},
+	"pinned_build_system": "",
 	"project": "CanadaTrustv1.sublime-project",
 	"replace":
 	{
@@ -246,6 +260,7 @@
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -262,6 +277,7 @@
 	"select_project":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -270,6 +286,7 @@
 	"select_symbol":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -278,12 +295,12 @@
 	"selected_group": 0,
 	"settings":
 	{
-		"_vintageous_last_buffer_search": "createbra",
+		"_vintageous_last_buffer_search": "thumb",
 		"_vintageous_last_buffer_search_command": "vi_slash",
 		"_vintageous_reset_during_init": true,
 		"vintage":
 		{
-			"_cmdline_cd": "C:\\Users\\Shafiq\\AppData\\Roaming\\Sublime Text 3\\Packages"
+			"_cmdline_cd": "C:\\Program Files\\Sublime Text 3"
 		}
 	},
 	"show_minimap": true,

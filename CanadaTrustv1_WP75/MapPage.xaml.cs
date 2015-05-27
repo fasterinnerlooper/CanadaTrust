@@ -30,6 +30,7 @@ using Windows.Devices.Geolocation;
 using CanadaTrustv1.ViewModel;
 using BankLocator_Common.Models;
 using Microsoft.Phone.Shell;
+using System.Xml.Linq;
 
 namespace CanadaTrustv1
 {
@@ -150,6 +151,7 @@ namespace CanadaTrustv1
         #region Navigation Elements
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
+            // Handle location consent
             if (!IsolatedStorageSettings.ApplicationSettings.Contains("LocationConsent"))
             {
                 MessageBoxResult consent = MessageBox.Show("This app requires use of Location Services data. Please tap 'OK' to give your consent.", "Location Services consent", MessageBoxButton.OKCancel);
@@ -170,14 +172,23 @@ namespace CanadaTrustv1
                 MessageBox.Show("Currently, this app requires location services to function. If you would like to enable location services, you can do so from the settings menu.", "Location Services required", MessageBoxButton.OK);
                 return;
             }
+            // Handle reviewing the app after x number of runs
             int TimesRun = IsolatedStorageSettings.ApplicationSettings.Contains("TimesRun") ? (int)IsolatedStorageSettings.ApplicationSettings["TimesRun"] : 0;
-            if (TimesRun == 3 || TimesRun - 3 % 5 == 0)
+            if (TimesRun == 5 || TimesRun == 10)
             {
                 MessageBoxResult consent = MessageBox.Show("Please consider rating and reviewing this app. Plese tap 'OK' to be taken to the marketplace screen", "Rate and review", MessageBoxButton.OKCancel);
                 if (consent == MessageBoxResult.OK)
                 {
                     var rateTask = new MarketplaceReviewTask();
                     rateTask.Show();
+                }
+                MessageBoxResult email = MessageBox.Show("Please consider emailing me with any feedback you have about the app. Please tap 'OK' to start a new email", "Email me with feedback", MessageBoxButton.OKCancel);
+                if(email == MessageBoxResult.OK)
+                {
+                    string appVersion = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
+                    var emailTask = new EmailComposeTask();
+                    emailTask.To = "shafiq.jetha@outlook.com";
+                    emailTask.Show();
                 }
             }
             IsolatedStorageSettings.ApplicationSettings["TimesRun"] = ++TimesRun;

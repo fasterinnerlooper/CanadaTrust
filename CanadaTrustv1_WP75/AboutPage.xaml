@@ -40,6 +40,13 @@
                         Margin="0,20,0,0"
                         >Changes</TextBlock>
                         <TextBlock>
+                            <Run Text="Version 1.4.3.0" />
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run Text="• Added error tracking, made slight text updates" />
+                            <LineBreak/>
+                        </TextBlock>
+                        <TextBlock>
                             <Run Text="Version 1.4.2.0:"/>
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap">
@@ -214,7 +221,7 @@
                         	<LineBreak/>
                         	<Run Text="No other data outside what has been requested, after you have offered your permission, is used by this application."/>
                         	<LineBreak/>
-                        	<Run Text="This data is shared with the mapping services provided by Microsoft and by TD Canada Trust to identify your location and the branches and ATMs owned by TD Canada Trust that are located within your vicinity."/>
+                        	<Run Text="This data is shared with the mapping services provided by Microsoft and by BMO Bank of Montréal to identify your location and the branches and ATMs owned by BMO Bank of Montréal that are located within your vicinity."/>
                         	<LineBreak/>
                         	<Run Text="No identifying information is stored in the application or sent over the internet that could be used to identify the device or the user of the device."/>
                         	<LineBreak/>

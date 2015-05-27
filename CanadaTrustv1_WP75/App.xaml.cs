@@ -39,7 +39,7 @@ namespace CanadaTrustv1
         public App()
         {
             // Initialize BugSense
-            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), RootFrame, "243a5892");
+            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), RootFrame, "0b4a5e79");
             // Other Windows Store specific operations
 
             // Standard Silverlight initialization
