@@ -17,11 +17,17 @@ using BugSense.Core.Model;
 using BankLocator.Models;
 using CanadaTrustv1.BingMapsGeocodeService;
 using BankLocator_Common.Models;
+using Microsoft.ApplicationInsights;
 
 namespace CanadaTrustv1
 {
     public partial class App : Application
     {
+        /// <summary>
+        /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
+        /// </summary>
+        public static TelemetryClient TelemetryClient;
+
         public static int currentBranch;
         public static BMOBranch Branch;
         public static IList<BMOBranch> Branches = new List<BMOBranch>();
@@ -38,6 +44,8 @@ namespace CanadaTrustv1
         /// </summary>
         public App()
         {
+            TelemetryClient = new TelemetryClient();
+
             // Initialize BugSense
             BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), RootFrame, "0b4a5e79");
             // Other Windows Store specific operations
